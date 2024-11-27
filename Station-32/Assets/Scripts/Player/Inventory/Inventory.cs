@@ -3,69 +3,67 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private static readonly GameObject[] _inventory = new GameObject[PlayerStats.MaxInventorySlot];
+    public static readonly GameObject[] InventoryObjects = new GameObject[PlayerStats.MaxInventorySlot];
 
-    private static int _currentSlot = 1;
+    public static int CurrentSlot { get; private set; } = 0;
 
-    [SerializeField] private Hands _hands;
+    [SerializeField] private PlayerHands _playerHands;
 
-    public static event Action OnItemChange;
+    public static event Action<int, GameObject> OnItemChange;
 
     private void Start()
     {
-        InventoryInputSystem.ChangeItemSlot += ChangeItem;
+        InventoryInputSystem.ChangeItemSlot += SwitchItem;
         InventoryInputSystem.DropItem += DropItem;
-        Item.AddItem += SwitchItem;
+        Item.AddItem += ChangeItem;
     }
 
-    private void ChangeItem(int slot)
+    private void SwitchItem(int slot)
     {
-        if (_currentSlot == -1)
+        if (CurrentSlot == -1 || slot > InventoryObjects.Length)
         {
             return;
         }
 
-        if (_currentSlot <= _inventory.Length)
+        CurrentSlot = slot -1;
+
+        if (CurrentSlot <= InventoryObjects.Length)
         {
-            if (_inventory[_currentSlot] != null)
-            {
-                _hands.TakeItem(_inventory[_currentSlot]);
-            }
+            _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
         }
 
-        _currentSlot = slot;
-
-        OnItemChange?.Invoke();
+        OnItemChange?.Invoke(CurrentSlot, InventoryObjects[CurrentSlot]);
     }
 
     /// <summary>
-    /// Switch Selected Item With A New One
+    /// Change Selected Item With A New One
     /// </summary>
     /// <param name="item"></param>
-    public void SwitchItem(GameObject item)
+    private void ChangeItem(GameObject item)
     {
-        if (_inventory[_currentSlot] != null)
+        if (InventoryObjects[CurrentSlot] != null)
         {
             DropItem();
         }
 
-       item.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
+        item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
-        _inventory[_currentSlot] = item;
+        InventoryObjects[CurrentSlot] = item;
     }
 
     private void DropItem()
     {
-        _hands.DropItem();
+        _playerHands.DropItem();
 
-        _inventory[_currentSlot] = null;
+        InventoryObjects[CurrentSlot] = null;
     }
 
     private void OnDestroy()
     {
-        InventoryInputSystem.ChangeItemSlot -= ChangeItem;
+        InventoryInputSystem.ChangeItemSlot -= SwitchItem;
         InventoryInputSystem.DropItem -= DropItem;
-        Item.AddItem -= SwitchItem;
+        Item.AddItem -= ChangeItem;
     }
 
 }

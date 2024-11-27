@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public abstract class Item : Interacted
 {
-    [UnityEngine.SerializeField] private RawImage _itemIcon;
-    public RawImage ItemIcon {  get { return _itemIcon; } }
+    [SerializeField] private RawImage _itemIcon;
+    public RawImage ItemIcon { get { return _itemIcon; } }
 
     public Rigidbody RB { get; private set; }
 
@@ -14,12 +14,17 @@ public abstract class Item : Interacted
     private void Start()
     {
         RB = GetComponent<Rigidbody>();
+
+        RB.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
 
     public override sealed void Interact()
     {
         AddItem?.Invoke(gameObject);
+
+        RB.useGravity = false;
+        RB.isKinematic = true;
     }
 
     public abstract void Use();

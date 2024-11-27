@@ -40,7 +40,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        return ray.GetPoint(Mathf.Infinity);
+        return ray.GetPoint(PlayerStats.InteractRange);
     }
 
     /// <summary>
