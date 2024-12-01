@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class UIInventorySlotsManager : MonoBehaviour
 {
-    private readonly GameObject[] _uiSlot = new GameObject[PlayerStats.MaxInventorySlot];
-    private readonly InventoryUISlot[] _inventorySlotsUI = new InventoryUISlot[PlayerStats.MaxInventorySlot];
+    private readonly GameObject[] _uiSlot = new GameObject[PlayerProperties.MaxInventorySlot];
+    private readonly InventoryUISlot[] _inventorySlotsUI = new InventoryUISlot[PlayerProperties.MaxInventorySlot];
 
     [SerializeField] private GameObject _uiSlotPrefab;
 

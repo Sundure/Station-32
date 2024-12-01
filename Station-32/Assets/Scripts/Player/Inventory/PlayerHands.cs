@@ -23,6 +23,8 @@ public class PlayerHands : MonoBehaviour
             createdItem.SetActive(false);
 
             ItemSlots[i] = createdItem;
+
+            SwitchItem(null);
         }
     }
 

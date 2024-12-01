@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MoveSystem : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] Player _player;
 
-    [SerializeField] private CharacterController _characterController;
+    [SerializeField] private float _speed;
 
     private void Update()
     {
@@ -13,7 +13,6 @@ public class MoveSystem : MonoBehaviour
 
         Vector3 vector3 = transform.right * x + transform.forward * y;
 
-
-        _characterController.Move(0.1f * _speed * Time.deltaTime * vector3);
+        _player.CharacterController.Move(0.1f * _speed * Time.deltaTime * vector3);
     }
 }

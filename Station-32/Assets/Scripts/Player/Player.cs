@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] private PlayerProperties _playerProperties;
+
+    [SerializeField] private CharacterController _characterController;
+    public CharacterController CharacterController { get { return _characterController; } }
 
     public void TakeDamage(float damage)
     {
-        _playerStats.Health -= damage;
+        _playerProperties.Health -= damage;
 
-        if (_playerStats.Health <= 0)
+        if (_playerProperties.Health <= 0)
         {
             Die();
         }
@@ -22,11 +25,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (_playerStats.Heat <= 0)
+        if (_playerProperties.Heat <= 0)
         {
-            _playerStats.Health -= Time.deltaTime;
+            _playerProperties.Health -= Time.deltaTime;
 
-            if (_playerStats.Health <= 0)
+            if (_playerProperties.Health <= 0)
             {
                 Die();
             }

@@ -33,14 +33,14 @@ public class PlayerCamera : MonoBehaviour
     }
 
     /// <summary>
-    /// Return Raycast Hit Point From Camera Ray
+    /// Return Raycast Hit Point From Camera Ray 
     /// </summary>
     /// <returns></returns>
     public static Vector3 CreateRaycastPoint()
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        return ray.GetPoint(PlayerStats.InteractRange);
+        return ray.GetPoint(PlayerProperties.InteractRange);
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        if (Physics.Raycast(ray, out RaycastHit hit, PlayerStats.InteractRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
         {
             if (hit.collider.TryGetComponent(out Interacted component))
             {
