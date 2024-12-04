@@ -8,7 +8,7 @@ public class InteractSystem : MonoBehaviour
         {
             if (PlayerCamera.GetComponentRaycast() != null)
             {
-                Interacted interacted = PlayerCamera.GetComponentRaycast();
+                IInteracted interacted = PlayerCamera.GetComponentRaycast();
 
                 interacted.Interact();
             }

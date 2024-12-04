@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Item : Interacted
+public abstract class Item : MonoBehaviour, IInteracted
 {
     [SerializeField] private RawImage _itemIcon;
     public RawImage ItemIcon { get { return _itemIcon; } }
@@ -19,7 +19,7 @@ public abstract class Item : Interacted
     }
 
 
-    public override sealed void Interact()
+    public void Interact()
     {
         AddItem?.Invoke(gameObject);
 
