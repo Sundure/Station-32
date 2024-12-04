@@ -24,7 +24,7 @@ public class JumpSystem : MonoBehaviour
 
     private void Jump()
     {
-        if (_playerProperties.Grounded == false)
+        if (_playerProperties.CanJump == false)
         {
             return;
         }

@@ -12,11 +12,14 @@ public class PlayerHands : MonoBehaviour
 
     private void Start()
     {
+
         for (int i = 0; i < Inventory.InventoryObjects.Length; i++)
         {
-            GameObject gameObject = new();
+            GameObject createdItem = new();
 
-            GameObject createdItem = Instantiate(gameObject, transform);
+            createdItem.transform.parent = transform;
+
+            createdItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             createdItem.name = $"Slot {i + 1}";
 
@@ -43,6 +46,7 @@ public class PlayerHands : MonoBehaviour
     {
         if (_item != null)
         {
+            Debug.Log("Drop");
             _currentItem.transform.parent = null;
 
             _item.RB.useGravity = true;
@@ -53,6 +57,8 @@ public class PlayerHands : MonoBehaviour
             Vector3 force = vector3 * 100;
 
             _item.RB.AddForce(force);
+
+            _item = null;
         }
     }
 

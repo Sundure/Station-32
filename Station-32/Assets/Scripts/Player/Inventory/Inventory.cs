@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        CurrentSlot = slot -1;
+        CurrentSlot = slot - 1;
 
         if (CurrentSlot <= InventoryObjects.Length)
         {
@@ -43,13 +43,15 @@ public class Inventory : MonoBehaviour
     {
         if (InventoryObjects[CurrentSlot] != null)
         {
-            DropItem();
+            return;
         }
 
         item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
         item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         InventoryObjects[CurrentSlot] = item;
+
+        _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
     }
 
     private void DropItem()

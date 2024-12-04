@@ -9,6 +9,7 @@ public class PlayerGroundCheckSystem : MonoBehaviour
     [SerializeField] private Transform _playerFeet;
 
     [SerializeField] private float _groundCheckRadius;
+    [SerializeField] private float _jumpCheckRadius;
 
     [SerializeField] private LayerMask _ignoredLayer;
 
@@ -18,13 +19,22 @@ public class PlayerGroundCheckSystem : MonoBehaviour
         if (_playerProperties.Jumped)
         {
             _playerProperties.Grounded = false;
+            _playerProperties.CanJump = false;
 
             _fallSpeed = 0;
 
             return;
         }
 
-        if (Physics.CheckSphere(_playerFeet.position, _groundCheckRadius , ~_ignoredLayer))
+        if (Physics.CheckSphere(_playerFeet.position, _jumpCheckRadius, ~_ignoredLayer))
+        {
+            _playerProperties.CanJump = true;
+        }
+        else
+            _playerProperties.CanJump = false;
+
+
+        if (Physics.CheckSphere(_playerFeet.position, _groundCheckRadius, ~_ignoredLayer))
         {
             _playerProperties.Grounded = true;
 
