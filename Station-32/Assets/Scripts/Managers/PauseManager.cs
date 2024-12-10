@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
 
     private static PauseManager _instance;
 
-    private void Start()
+    private void Awake()
     {
         if (_instance == null)
         {
@@ -18,6 +18,7 @@ public class PauseManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);

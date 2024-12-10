@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AudioStopManager : MonoBehaviour
+public class StopAudioOnPause : MonoBehaviour
 {
     private AudioSource _audio;
     private void Start()
