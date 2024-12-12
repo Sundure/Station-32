@@ -13,7 +13,8 @@ public class PlayerGroundCheckSystem : MonoBehaviour
 
     [SerializeField] private LayerMask _ignoredLayer;
 
-    private float _fallSpeed;
+    [SerializeField] private float _fallSpeed;
+
     private void FixedUpdate()
     {
         if (_playerProperties.Jumped)
