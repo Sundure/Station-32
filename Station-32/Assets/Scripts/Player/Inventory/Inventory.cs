@@ -49,6 +49,8 @@ public class Inventory : MonoBehaviour
         item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
         item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
+        item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
+
         InventoryObjects[CurrentSlot] = item;
 
         _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);

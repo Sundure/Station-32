@@ -7,6 +7,9 @@ public abstract class Item : MonoBehaviour, IInteracted
     [SerializeField] private RawImage _itemIcon;
     public RawImage ItemIcon { get { return _itemIcon; } }
 
+    [SerializeField] private Vector3 _standartRotation;
+    public Vector3 StandartRotation { get { return _standartRotation; } }
+
     public Rigidbody RB { get; private set; }
 
     public static event Action<GameObject> AddItem;

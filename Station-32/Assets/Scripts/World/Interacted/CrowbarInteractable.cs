@@ -9,7 +9,6 @@ public class CrowbarInteractable : MonoBehaviour, IInstrumentInteractable
     private bool _interacted = true;
     public void Interact()
     {
-
         if (_interacted == false) return;
 
         _interacted = false;

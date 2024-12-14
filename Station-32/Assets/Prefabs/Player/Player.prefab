@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d012b9ea13216547af1fda37826808d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _swayMultiplier: 30
-  _smoth: 10
+  _swayMultiplier: 50
+  _smoth: 100
 --- !u!1 &4661276513430842970
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +473,7 @@ MonoBehaviour:
   _ignoredLayer:
     serializedVersion: 2
     m_Bits: 8
+  _fallSpeed: 0
 --- !u!114 &4892594087563505108
 MonoBehaviour:
   m_ObjectHideFlags: 0
