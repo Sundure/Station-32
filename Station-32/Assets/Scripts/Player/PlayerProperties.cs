@@ -17,4 +17,11 @@ public class PlayerProperties : MonoBehaviour
     public static readonly int MaxInventorySlot = 5;
 
     public readonly float PlayerFallSpeed = 8;
+
+    public static LayerMask PlayerLayer { get; private set; }
+
+    private void Awake()
+    {
+        PlayerLayer = 1 << gameObject.layer;
+    }
 }

@@ -18,7 +18,6 @@ public abstract class Item : MonoBehaviour, IInteracted
         RB.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
-
     public void Interact()
     {
         AddItem?.Invoke(gameObject);

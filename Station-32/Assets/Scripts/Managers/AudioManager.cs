@@ -1,29 +1,28 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioMixer _gameAudioMixer;
     [SerializeField] private AudioMixer _musicAudioMixer;
 
+    public AudioMixer GameAudioMixer { get { return _gameAudioMixer; } }
+    public AudioMixer MusicAudioMixer { get { return _musicAudioMixer; } }
+
     private const float _minVolume = -40;
     private const float _maxVolume = 20;
     private const float _silentVolume = -80;
-
-    public AudioMixer GameAudioMixer { get { return _gameAudioMixer; } }
-    public AudioMixer MusicAudioMixer { get { return _musicAudioMixer; } }
 
     private float _volumeScale;
 
     private bool _isAwaiking = true;
 
-    private static AudioManager _instance;
+    public static AudioManager Instance { get; private set; }
     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
         else
         {

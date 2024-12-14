@@ -44,18 +44,18 @@ public class PlayerCamera : MonoBehaviour
     /// Return Component From Camera Ray
     /// </summary>
     /// <returns></returns>
-    public static IInteracted GetComponentRaycast()
+    public static T GetComponentRaycast<T>() where T : class
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
         {
-            if (hit.collider.TryGetComponent(out IInteracted component))
-            {
-                return component;
-            }
+           if (hit.collider.TryGetComponent(out T component))
+           {
+               return component;
+           }
         }
 
-        return null;
+        return default;
     }
 }

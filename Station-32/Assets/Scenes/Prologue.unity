@@ -10871,7 +10871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedEdges.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedFaces.Array.size
@@ -10879,7 +10879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: 'm_SelectedVertices.Array.data[0]'
@@ -29251,11 +29251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedEdges.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedFaces.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_Positions.Array.data[42].z
@@ -29407,7 +29407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: m_Textures0.Array.data[100].y
@@ -29547,7 +29547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: 'm_SelectedVertices.Array.data[0]'
-      value: 35
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 2625191032354635788, guid: ca0ec740ef14d794db3f114d1a47a504, type: 3}
       propertyPath: 'm_SelectedVertices.Array.data[1]'

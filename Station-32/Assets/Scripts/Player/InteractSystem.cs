@@ -6,12 +6,9 @@ public class InteractSystem : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact"))
         {
-            if (PlayerCamera.GetComponentRaycast() != null)
-            {
-                IInteracted interacted = PlayerCamera.GetComponentRaycast();
+            IInteracted interacted = PlayerCamera.GetComponentRaycast<IInteracted>();
 
-                interacted.Interact();
-            }
+            interacted?.Interact();
         }
     }
 }
