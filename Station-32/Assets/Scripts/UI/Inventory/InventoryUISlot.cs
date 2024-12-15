@@ -3,21 +3,15 @@ using UnityEngine.UI;
 
 public class InventoryUISlot : MonoBehaviour
 {
-    private RawImage _icon;
-    [SerializeField] private GameObject _frame;
+    private RawImage _rawImage;
 
-    private void Start()
+    private void Awake()
     {
-        _icon = GetComponent<RawImage>();
+        _rawImage = GetComponent<RawImage>();
     }
 
-    public void ChangeIcon(RawImage image)
+    public void ChangeIcon(Texture image)
     {
-        _icon.texture = image.texture;
-    }
-
-    public void SwitchFrame(bool enabled)
-    {
-        _frame.SetActive(enabled);
+        _rawImage.texture = image;
     }
 }

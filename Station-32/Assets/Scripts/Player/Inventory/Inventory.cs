@@ -9,7 +9,9 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private PlayerHands _playerHands;
 
-    public static event Action<int, GameObject> OnItemChange;
+    public static event Action<int, GameObject> OnAddItem;
+    public static event Action<int> OnItemDrop;
+    public static event Action OnSwitchItem;
 
     private void Start()
     {
@@ -30,13 +32,13 @@ public class Inventory : MonoBehaviour
         if (CurrentSlot <= InventoryObjects.Length)
         {
             _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
-        }
 
-        OnItemChange?.Invoke(CurrentSlot, InventoryObjects[CurrentSlot]);
+            OnSwitchItem?.Invoke();
+        }
     }
 
     /// <summary>
-    /// Change Selected Item With A New One
+    /// Change Empty Item Slot With A New Item
     /// </summary>
     /// <param name="item"></param>
     private void ChangeItem(GameObject item)
@@ -53,6 +55,8 @@ public class Inventory : MonoBehaviour
 
         InventoryObjects[CurrentSlot] = item;
 
+        OnAddItem?.Invoke(CurrentSlot, item);
+
         _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
     }
 
@@ -60,7 +64,11 @@ public class Inventory : MonoBehaviour
     {
         _playerHands.DropItem();
 
+        if (InventoryObjects[CurrentSlot] != null)
+            OnItemDrop?.Invoke(CurrentSlot);
+
         InventoryObjects[CurrentSlot] = null;
+
     }
 
     private void OnDestroy()
