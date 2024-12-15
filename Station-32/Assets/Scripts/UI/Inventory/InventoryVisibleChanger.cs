@@ -33,7 +33,7 @@ public class InventoryVisibleChanger : MonoBehaviour
         }
     }
 
-    private void OnAddItem(int i, GameObject gameObject)
+    private void OnAddItem(int _, GameObject __)
     {
         enabled = true;
 
@@ -41,7 +41,7 @@ public class InventoryVisibleChanger : MonoBehaviour
 
         _canvasGroup.alpha = 1;
     }
-    private void OnItemDrop(int i)
+    private void OnItemDrop(int _)
     {
         enabled = true;
 
@@ -49,7 +49,7 @@ public class InventoryVisibleChanger : MonoBehaviour
 
         _canvasGroup.alpha = 1;
     }
-    private void OnSwitchItem()
+    private void OnSwitchItem(int _)
     {
         enabled = true;
 

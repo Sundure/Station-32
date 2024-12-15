@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
 
     public static event Action<int, GameObject> OnAddItem;
     public static event Action<int> OnItemDrop;
-    public static event Action OnSwitchItem;
+    public static event Action<int> OnSwitchItem;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
         {
             _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
 
-            OnSwitchItem?.Invoke();
+            OnSwitchItem?.Invoke(CurrentSlot);
         }
     }
 

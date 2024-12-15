@@ -12,7 +12,7 @@ public class PlayerProperties : MonoBehaviour
 
     public bool CanJump;
 
-    public static readonly float InteractRange = 4f;
+    public static readonly float InteractRange = 2f;
 
     public static readonly int MaxInventorySlot = 5;
 

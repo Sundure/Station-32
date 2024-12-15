@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIInventorySlotsManager : MonoBehaviour
 {
@@ -10,6 +9,8 @@ public class UIInventorySlotsManager : MonoBehaviour
 
     [SerializeField] private Transform _itemSlotFolder;
 
+    private InventoryUISlot _previousChosenSlot;
+
     private void Start()
     {
         for (int i = 0; i < _uiSlot.Length; i++)
@@ -19,32 +20,39 @@ public class UIInventorySlotsManager : MonoBehaviour
             _inventorySlotsUI[i] = _uiSlot[i].GetComponent<InventoryUISlot>();
 
             SetInventoryDefaultInventoryIcon(i);
-            AddFrame(_uiSlot[i]);
         }
 
+        SelectInventorySlot(0);
+
+        Inventory.OnSwitchItem += SelectInventorySlot;
         Inventory.OnAddItem += SetInventorySlotProperties;
         Inventory.OnItemDrop += SetInventoryDefaultInventoryIcon;
     }
 
-    private void AddFrame(GameObject gameObject)
+    private void SelectInventorySlot(int slot)
     {
-        Texture2D texture = new(1, 1);
+        if (_inventorySlotsUI[slot] == _previousChosenSlot)
+            return;
 
-        Color color = new(0.5f, 0.5f, 0.5f, 0.3f);
+        Texture2D texture2D = new(1, 1);
 
-        texture.SetPixel(0, 0, color);
+        Color color = new(1, 1, 0.8f, 0.3f);
 
-        texture.Apply();
+        texture2D.SetPixel(0, 0, color);
 
+        texture2D.Apply();
 
-        GameObject frame = new() { name = "Frame" };
+        _inventorySlotsUI[slot].SetFrameTexture(texture2D);
 
-        frame.transform.parent = gameObject.transform;
+        SetDefaultPreviousInventoryIcon();
 
-        frame.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        frame.transform.localScale = Vector3.one;
+        _previousChosenSlot = _inventorySlotsUI[slot];
+    }
 
-        frame.AddComponent<RawImage>().texture = texture;
+    private void SetDefaultPreviousInventoryIcon()
+    {
+        if (_previousChosenSlot != null)
+            _previousChosenSlot.SetDefaultFrameTexture();
     }
 
     private void SetInventoryDefaultInventoryIcon(int slot)
@@ -71,5 +79,6 @@ public class UIInventorySlotsManager : MonoBehaviour
     {
         Inventory.OnAddItem -= SetInventorySlotProperties;
         Inventory.OnItemDrop -= SetInventoryDefaultInventoryIcon;
+        Inventory.OnSwitchItem -= SelectInventorySlot;
     }
 }
