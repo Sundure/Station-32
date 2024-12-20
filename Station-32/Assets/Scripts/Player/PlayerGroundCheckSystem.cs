@@ -15,7 +15,7 @@ public class PlayerGroundCheckSystem : MonoBehaviour
 
     [SerializeField] private float _fallSpeed;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_playerProperties.Jumped)
         {
@@ -28,9 +28,7 @@ public class PlayerGroundCheckSystem : MonoBehaviour
         }
 
         if (Physics.CheckSphere(_playerFeet.position, _jumpCheckRadius, ~_ignoredLayer))
-        {
             _playerProperties.CanJump = true;
-        }
         else
             _playerProperties.CanJump = false;
 
@@ -46,8 +44,8 @@ public class PlayerGroundCheckSystem : MonoBehaviour
 
         _playerProperties.Grounded = false;
 
-        _fallSpeed += Time.fixedTime / 250;
+        _fallSpeed += Time.deltaTime / 2;
 
-        _player.CharacterController.Move(Time.fixedDeltaTime * _playerProperties.PlayerFallSpeed * _fallSpeed * Vector3.down);
+        _player.CharacterController.Move(Time.deltaTime * _playerProperties.PlayerFallSpeed * _fallSpeed * Vector3.down);
     }
 }

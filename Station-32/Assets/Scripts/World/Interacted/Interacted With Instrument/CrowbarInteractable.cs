@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class CrowbarInteractable : MonoBehaviour, IInstrumentInteractable
+public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
 {
     [SerializeField] private AudioClip _onUseClip;
 

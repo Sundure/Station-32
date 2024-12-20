@@ -10,15 +10,17 @@ public class PlayerCamera : MonoBehaviour
 
     private static Camera _camera;
 
-    private void Start()
+    private void Awake()
     {
         _camera = GetComponent<Camera>();
+
+        PlayerInputSystem.OnAxisCameraInputXY += Move;
     }
 
-    private void Update()
+    private void Move(float x, float y)
     {
-        float x = Input.GetAxis("Mouse X") * _mouseSens * Time.deltaTime;
-        float y = Input.GetAxis("Mouse Y") * _mouseSens * Time.deltaTime;
+        x *= _mouseSens * Time.timeScale;
+        y *= _mouseSens * Time.timeScale;
 
         _xRotation -= y;
 
@@ -57,5 +59,10 @@ public class PlayerCamera : MonoBehaviour
         }
 
         return default;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInputSystem.OnAxisCameraInputXY -= Move;
     }
 }

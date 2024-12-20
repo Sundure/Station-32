@@ -14,20 +14,36 @@ public class JumpSystem : MonoBehaviour
 
     [SerializeField] private Vector3 _currentForce;
 
+    private void Awake()
+    {
+        PlayerInputSystem.OnInputSpace += Jump;
+
+        enabled = false;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_playerProperties.Jumped == true)
         {
-            Jump();
+            _currentForce.y = Mathf.Sqrt(_jumpTime * _jumpStrength * Time.deltaTime);
+
+            _jumpTime -= Time.deltaTime;
+
+            _player.CharacterController.Move(Time.deltaTime * _playerProperties.PlayerFallSpeed * _currentForce);
+
+            if (_jumpTime <= 0)
+            {
+                _playerProperties.Jumped = false;
+
+                enabled = false;
+            }
         }
     }
 
     private void Jump()
     {
         if (_playerProperties.CanJump == false)
-        {
             return;
-        }
 
         _playerProperties.Grounded = false;
         _playerProperties.Jumped = true;
@@ -35,22 +51,12 @@ public class JumpSystem : MonoBehaviour
         _currentForce = Vector3.zero;
 
         _jumpTime = _jumpForce;
+
+        enabled = true;
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        if (_playerProperties.Jumped == true)
-        {
-            _currentForce.y = Mathf.Sqrt(_jumpTime * _jumpStrength * Time.fixedDeltaTime);
-
-            _jumpTime -= Time.fixedDeltaTime;
-
-            _player.CharacterController.Move(Time.fixedDeltaTime * _playerProperties.PlayerFallSpeed * _currentForce);
-
-            if (_jumpTime <= 0)
-            {
-                _playerProperties.Jumped = false;
-            }
-        }
+        PlayerInputSystem.OnInputSpace -= Jump;
     }
 }
