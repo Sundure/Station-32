@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class CrouchSystem : MonoBehaviour
 {
-    [SerializeField] private bool _crouch;
+    [SerializeField] private PlayerProperties _playerProperties;
 
     [SerializeField] private float _crouchVelocity;
-
     [SerializeField] private float _crouchSpeedMultilier;
+    [SerializeField] private float _crouchSpeed;
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class CrouchSystem : MonoBehaviour
 
     private void Update()
     {
-        if (_crouch)
+        if (_playerProperties.Crouch)
         {
             Crouch();
         }
@@ -29,10 +29,12 @@ public class CrouchSystem : MonoBehaviour
 
     private void SwitchCrouch()
     {
-        if (_crouch == false)
-        {
+        if (_playerProperties.Grounded == false)
+            return;
+
+
+        if (_playerProperties.Crouch == false)
             SetCrouch();
-        }
         else
         {
             // Absolutely Broken System
@@ -48,18 +50,18 @@ public class CrouchSystem : MonoBehaviour
 
     private void SetCrouch()
     {
-        _crouch = true;
+        _playerProperties.Crouch = true;
 
-        MoveSystem.AddSpeedMultipler(this, _crouchSpeedMultilier);
+        PlayerMoveSystem.AddSpeedMultipler(this, _crouchSpeedMultilier);
 
         enabled = true;
     }
 
     private void SetStandUp()
     {
-        _crouch = false;
+        _playerProperties.Crouch = false;
 
-        MoveSystem.RemoveSpeedMultipler(this);
+        PlayerMoveSystem.RemoveSpeedMultipler(this);
 
         enabled = true;
     }
@@ -68,7 +70,7 @@ public class CrouchSystem : MonoBehaviour
     {
         Vector3 vector3 = transform.localScale;
 
-        vector3.y += Time.deltaTime;
+        vector3.y += Time.deltaTime * _crouchSpeed;
 
         float previousHeight = transform.localScale.y;
 
@@ -96,7 +98,7 @@ public class CrouchSystem : MonoBehaviour
     {
         Vector3 vector3 = transform.localScale;
 
-        vector3.y -= Time.deltaTime;
+        vector3.y -= Time.deltaTime * _crouchSpeed;
 
         float previousHeight = transform.localScale.y;
 

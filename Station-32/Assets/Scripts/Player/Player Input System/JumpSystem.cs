@@ -7,12 +7,12 @@ public class JumpSystem : MonoBehaviour
     [SerializeField] private Player _player;
 
     [SerializeField] private float _jumpStrength;
-
     [SerializeField] private float _jumpForce;
-
-    private float _jumpTime; // value with decreasing which the flight force decreases
+    [SerializeField] private float _speedDebuff;
 
     [SerializeField] private Vector3 _currentForce;
+
+    private float _jumpTime; // value with decreasing which the flight force decreases
 
     private void Awake()
     {
@@ -36,13 +36,15 @@ public class JumpSystem : MonoBehaviour
                 _playerProperties.Jumped = false;
 
                 enabled = false;
+
+                PlayerMoveSystem.RemoveSpeedMultipler(this);
             }
         }
     }
 
     private void Jump()
     {
-        if (_playerProperties.CanJump == false)
+        if (_playerProperties.CanJump == false || _playerProperties.Crouch)
             return;
 
         _playerProperties.Grounded = false;
@@ -53,6 +55,8 @@ public class JumpSystem : MonoBehaviour
         _jumpTime = _jumpForce;
 
         enabled = true;
+
+        PlayerMoveSystem.AddSpeedMultipler(this, _speedDebuff);
     }
 
     private void OnDestroy()

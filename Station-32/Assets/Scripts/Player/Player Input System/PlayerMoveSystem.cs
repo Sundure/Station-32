@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MoveSystem : MonoBehaviour
+public class PlayerMoveSystem : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
@@ -33,14 +33,11 @@ public class MoveSystem : MonoBehaviour
     /// </summary>
     /// <param name="classKey"></param>
     /// <param name="multiplier"></param>
-    public static void AddSpeedMultipler(MonoBehaviour classKey, float multiplier) 
+    public static void AddSpeedMultipler(MonoBehaviour classKey, float multiplier)
     {
         if (SpeedMultiplierList.ContainsKey(classKey))
-        {
-            Debug.LogError("Only One Speed Multipler Can Make One Class");
-
             return;
-        }
+
         SpeedMultiplierList.Add(classKey, multiplier);
     }
 
@@ -51,7 +48,8 @@ public class MoveSystem : MonoBehaviour
     /// <param name="classKey"></param>
     public static void RemoveSpeedMultipler(MonoBehaviour classKey)
     {
-        SpeedMultiplierList.Remove(classKey);
+        if (SpeedMultiplierList.ContainsKey(classKey))
+            SpeedMultiplierList.Remove(classKey);
     }
 
     private void OnDestroy()

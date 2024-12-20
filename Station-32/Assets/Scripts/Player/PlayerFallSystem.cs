@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerGroundCheckSystem : MonoBehaviour
+public class PlayerFallSystem : MonoBehaviour
 {
     [SerializeField] private PlayerProperties _playerProperties;
 
@@ -13,8 +13,9 @@ public class PlayerGroundCheckSystem : MonoBehaviour
 
     [SerializeField] private LayerMask _ignoredLayer;
 
-    [SerializeField] private float _fallSpeed;
+    [SerializeField] private float _speedDebuff;
 
+    private float _fallSpeed;
     private void Update()
     {
         if (_playerProperties.Jumped)
@@ -27,17 +28,16 @@ public class PlayerGroundCheckSystem : MonoBehaviour
             return;
         }
 
-        if (Physics.CheckSphere(_playerFeet.position, _jumpCheckRadius, ~_ignoredLayer))
-            _playerProperties.CanJump = true;
-        else
-            _playerProperties.CanJump = false;
-
+        _playerProperties.CanJump = Physics.CheckSphere(_playerFeet.position, _jumpCheckRadius, ~_ignoredLayer);
+           
 
         if (Physics.CheckSphere(_playerFeet.position, _groundCheckRadius, ~_ignoredLayer))
         {
             _playerProperties.Grounded = true;
 
             _fallSpeed = 0;
+
+            PlayerMoveSystem.RemoveSpeedMultipler(this);
 
             return;
         }
@@ -47,5 +47,7 @@ public class PlayerGroundCheckSystem : MonoBehaviour
         _fallSpeed += Time.deltaTime / 2;
 
         _player.CharacterController.Move(Time.deltaTime * _playerProperties.PlayerFallSpeed * _fallSpeed * Vector3.down);
+
+        PlayerMoveSystem.AddSpeedMultipler(this, _speedDebuff);
     }
 }
