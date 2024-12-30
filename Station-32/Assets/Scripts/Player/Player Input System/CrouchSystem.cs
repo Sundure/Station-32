@@ -8,6 +8,7 @@ public class CrouchSystem : MonoBehaviour
     [SerializeField] private float _crouchSpeedMultilier;
     [SerializeField] private float _crouchSpeed;
 
+
     private void Awake()
     {
         PlayerInputSystem.OnInputControl += SwitchCrouch;
@@ -18,13 +19,10 @@ public class CrouchSystem : MonoBehaviour
     private void Update()
     {
         if (_playerProperties.Crouch)
-        {
             Crouch();
-        }
+
         else
-        {
             StandUp();
-        }
     }
 
     private void SwitchCrouch()
@@ -37,13 +35,12 @@ public class CrouchSystem : MonoBehaviour
             SetCrouch();
         else
         {
-            // Absolutely Broken System
+            float velocity = _playerProperties.PlayerCollider.bounds.size.y;
 
             Vector3 crouchCheckPosition = transform.position;
+            crouchCheckPosition.y = transform.position.y + velocity / 2;
 
-            crouchCheckPosition.y = transform.position.y + transform.position.y / 2;
-
-            if (!Physics.Raycast(crouchCheckPosition, Vector3.up, out RaycastHit _, _crouchVelocity + 0.3f))
+            if (!Physics.Raycast(crouchCheckPosition, Vector3.up, out RaycastHit _, velocity))
                 SetStandUp();
         }
     }

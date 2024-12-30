@@ -25,14 +25,18 @@ public class JumpSystem : MonoBehaviour
     {
         if (_playerProperties.Jumped == true)
         {
+            Vector3 pastPos = transform.position;
+
             _currentForce.y = Mathf.Sqrt(_jumpTime * _jumpStrength * Time.deltaTime);
 
             _jumpTime -= Time.deltaTime;
 
             _player.CharacterController.Move(Time.deltaTime * _playerProperties.PlayerFallSpeed * _currentForce);
 
-            if (_jumpTime <= 0)
+            if (_jumpTime <= 0 || transform.position == pastPos)
             {
+                _jumpTime = 0;
+
                 _playerProperties.Jumped = false;
 
                 enabled = false;
