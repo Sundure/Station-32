@@ -45,19 +45,21 @@ public class Inventory : MonoBehaviour
     {
         if (InventoryObjects[CurrentSlot] != null)
         {
-            return;
+            DropItem();
         }
+        else
+        {
+            item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
+            item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
-        item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
-        item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
 
-        item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
+            InventoryObjects[CurrentSlot] = item;
 
-        InventoryObjects[CurrentSlot] = item;
+            OnAddItem?.Invoke(CurrentSlot, item);
 
-        OnAddItem?.Invoke(CurrentSlot, item);
-
-        _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
+            _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
+        }
     }
 
     private void DropItem()

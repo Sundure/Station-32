@@ -10,9 +10,8 @@ public class PlayerHands : MonoBehaviour
 
     private int _previousSlot;
 
-    private void Start()
+    private void Awake()
     {
-
         for (int i = 0; i < Inventory.InventoryObjects.Length; i++)
         {
             GameObject createdItem = new();
