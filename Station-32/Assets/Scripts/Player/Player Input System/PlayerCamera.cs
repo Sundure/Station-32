@@ -32,6 +32,22 @@ public class PlayerCamera : MonoBehaviour
     }
 
     /// <summary>
+    /// Return GameObject From Raycast Hit
+    /// </summary>
+    /// <returns></returns>
+    public static GameObject GetGameObjectRaycast()
+    {
+        Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+
+        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
+        {
+            return hit.collider.gameObject;
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Return Raycast Hit Point From Camera Ray 
     /// </summary>
     /// <returns></returns>
