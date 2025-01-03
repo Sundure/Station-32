@@ -5,6 +5,8 @@ public class PlayerMoveSystem : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
+    [SerializeField] private Transform _playerCore; //Player Core Its Main Father GameObject 
+
     [SerializeField] private float _speed;
 
     private static readonly Dictionary<MonoBehaviour, float> SpeedMultiplierList = new();
@@ -15,6 +17,8 @@ public class PlayerMoveSystem : MonoBehaviour
     }
     private void Move(float x, float y)
     {
+        _playerCore.position = transform.position;
+
         Vector3 vector3 = transform.right * x + transform.forward * y;
 
         float speed = _speed;

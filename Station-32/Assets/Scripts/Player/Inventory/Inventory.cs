@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static readonly GameObject[] InventoryObjects = new GameObject[PlayerProperties.MaxInventorySlot];
+    public readonly GameObject[] InventoryObjects = new GameObject[PlayerProperties.MaxInventorySlot];
 
-    public static int CurrentSlot { get; private set; } = 0;
+    public int CurrentSlot { get; private set; } = 0;
 
     [SerializeField] private PlayerHands _playerHands;
 
@@ -38,28 +38,25 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// Change Empty Item Slot With A New Item
+    /// Place Item In The Item Slot
     /// </summary>
     /// <param name="item"></param>
     private void ChangeItem(GameObject item)
     {
         if (InventoryObjects[CurrentSlot] != null)
-        {
             DropItem();
-        }
-        else
-        {
-            item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
-            item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        
+        item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
+        item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
-            item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
+        item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
 
-            InventoryObjects[CurrentSlot] = item;
+        InventoryObjects[CurrentSlot] = item;
 
-            OnAddItem?.Invoke(CurrentSlot, item);
+        OnAddItem?.Invoke(CurrentSlot, item);
 
-            _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
-        }
+        _playerHands.SwitchItem(InventoryObjects[CurrentSlot]);
+
     }
 
     private void DropItem()

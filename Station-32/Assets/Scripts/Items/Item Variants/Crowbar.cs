@@ -7,6 +7,8 @@ public class Crowbar : Item
 
         if (crowbarInteractable != null)
             crowbarInteractable.Interact();
+
+
     }
     protected override void DisableItem()
     {

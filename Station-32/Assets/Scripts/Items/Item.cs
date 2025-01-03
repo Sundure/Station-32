@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class Item : MonoBehaviour, IInteracted
 {
@@ -11,6 +10,9 @@ public abstract class Item : MonoBehaviour, IInteracted
     public Vector3 StandartRotation { get { return _standartRotation; } }
 
     public Rigidbody RB { get; private set; }
+
+    [SerializeField] private IgnoredRBLayers _ignoredRBLayers;
+    public IgnoredRBLayers IgnoredRBLayers { get { return _ignoredRBLayers; } }
 
     public static event Action<GameObject> AddItem;
 

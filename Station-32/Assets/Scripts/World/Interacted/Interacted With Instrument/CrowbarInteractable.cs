@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
 {
+    [SerializeField] private IgnoredRBLayers _ignoredRBLayers;
+
     [SerializeField] private AudioClip _onUseClip;
 
     [SerializeField] private float _destroyTime;
@@ -25,7 +27,8 @@ public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
         rb.isKinematic = false;
         rb.useGravity = true;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        rb.excludeLayers |= PlayerProperties.PlayerLayer;
+
+        _ignoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
 
         StartCoroutine(DestroyAudioObject(audioObject));
 

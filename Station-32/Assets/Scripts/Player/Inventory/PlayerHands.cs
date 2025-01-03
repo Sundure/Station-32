@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerHands : MonoBehaviour
 {
-    public GameObject[] ItemSlots = new GameObject[Inventory.InventoryObjects.Length];
+    [SerializeField] private Inventory _inventory;
+
+    public GameObject[] ItemSlots = new GameObject[PlayerProperties.MaxInventorySlot];
 
     private GameObject _currentItem;
 
@@ -10,9 +12,9 @@ public class PlayerHands : MonoBehaviour
 
     private int _previousSlot;
 
-    private void Awake()
+    private void Start()
     {
-        for (int i = 0; i < Inventory.InventoryObjects.Length; i++)
+        for (int i = 0; i < _inventory.InventoryObjects.Length; i++)
         {
             GameObject createdItem = new();
 
@@ -51,6 +53,8 @@ public class PlayerHands : MonoBehaviour
             _item.RB.useGravity = true;
             _item.RB.isKinematic = false;
 
+            _item.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
+
             Vector3 vector3 = (PlayerCamera.CreateRaycastPoint() - _item.RB.position).normalized;
 
             Vector3 force = vector3 * 100;
@@ -65,15 +69,16 @@ public class PlayerHands : MonoBehaviour
     {
         ItemSlots[_previousSlot].SetActive(false);
 
-        ItemSlots[Inventory.CurrentSlot].SetActive(true);
+        ItemSlots[_inventory.CurrentSlot].SetActive(true);
 
-        _previousSlot = Inventory.CurrentSlot;
+        _previousSlot = _inventory.CurrentSlot;
 
         if (gameObject != null)
         {
             _currentItem = gameObject;
 
             _item = _currentItem.GetComponent<Item>();
+            _item.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
 
             return;
         }

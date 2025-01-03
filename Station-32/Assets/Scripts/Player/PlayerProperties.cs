@@ -12,7 +12,8 @@ public class PlayerProperties : MonoBehaviour
     public bool Jumped;
     public bool CanJump;
 
-    public Collider PlayerCollider {  get; private set; }
+    [SerializeField] private Collider _playerCollider;
+    public Collider PlayerCollider { get { return _playerCollider; } }
 
     public readonly float PlayerFallSpeed = 8;
 
@@ -27,6 +28,5 @@ public class PlayerProperties : MonoBehaviour
     {
         PlayerLayer = 1 << gameObject.layer;
 
-        PlayerCollider = transform.GetComponent<Collider>();
     }
 }

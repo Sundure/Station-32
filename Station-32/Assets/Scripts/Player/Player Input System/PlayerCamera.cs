@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private Transform _body;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _cameraPosition;
 
     [SerializeField] private float _mouseSens;
 
@@ -17,6 +18,11 @@ public class PlayerCamera : MonoBehaviour
         PlayerInputSystem.OnAxisCameraInputXY += Move;
     }
 
+    private void Update()
+    {
+        transform.localPosition = _cameraPosition.localPosition * _cameraPosition.lossyScale.y;
+    }
+
     private void Move(float x, float y)
     {
         x *= _mouseSens * Time.timeScale;
@@ -28,7 +34,7 @@ public class PlayerCamera : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
 
-        _body.Rotate(x * Vector3.up);
+        _player.Rotate(x * Vector3.up);
     }
 
     /// <summary>
@@ -62,13 +68,13 @@ public class PlayerCamera : MonoBehaviour
     /// Return Component From Camera Ray
     /// </summary>
     /// <returns></returns>
-    public static T GetComponentRaycast<T>() where T : class
+    public static TComponent GetComponentRaycast<TComponent>() where TComponent : class
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
         {
-           if (hit.collider.TryGetComponent(out T component))
+           if (hit.collider.TryGetComponent(out TComponent component))
            {
                return component;
            }
