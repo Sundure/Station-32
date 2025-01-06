@@ -111,9 +111,9 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Coal_Destiny: 2.5
+    - _Coal_Destiny: 4.7
     - _Coal_Randomize: 50
-    - _Coal_Speed: -0.15
+    - _Coal_Speed: -0.18
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -122,7 +122,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fire_Power: 10
+    - _Fire_Power: 16.3
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

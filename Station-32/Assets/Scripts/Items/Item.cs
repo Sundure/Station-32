@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour, IInteracted
 {
+    public InteractedType InteractedTypes { get; private set; } = InteractedType.Item;
+
     [SerializeField] private Texture _itemIcon;
     public Texture ItemIcon { get { return _itemIcon; } } 
 
@@ -11,16 +13,19 @@ public abstract class Item : MonoBehaviour, IInteracted
 
     public Rigidbody RB { get; private set; }
 
-    [SerializeField] private IgnoredRBLayers _ignoredRBLayers;
-    public IgnoredRBLayers IgnoredRBLayers { get { return _ignoredRBLayers; } }
+    public ItemBehaviorManager ItemBehaviorManager { get; private set; }
 
     public static event Action<GameObject> AddItem;
 
-    private void Start()
+    private void Awake()
     {
         RB = GetComponent<Rigidbody>();
 
         RB.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+        ItemBehaviorManager = gameObject.AddComponent<ItemBehaviorManager>();
+
+        ItemBehaviorManager.IgnoredRBLayers.SetRB(RB);
     }
 
     public void Interact()
@@ -31,6 +36,17 @@ public abstract class Item : MonoBehaviour, IInteracted
         RB.isKinematic = true;
     }
 
+    public void OnItemDrop()
+    {
+        ItemBehaviorManager.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
+    }
+
+    public void OnItemPickUp()
+    {
+        ItemBehaviorManager.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
+    }
+
     public abstract void Use();
     protected abstract void DisableItem();
+
 }

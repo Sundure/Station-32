@@ -1,8 +1,7 @@
-using UnityEngine;
 
-public class PrologueEnterDoor : MonoBehaviour ,IInteracted
+public class PrologueEnterDoor : Structure
 {
-    public void Interact()
+    protected override void Use()
     {
         SceneManager.LoadScene(SceneList.Station32);
     }

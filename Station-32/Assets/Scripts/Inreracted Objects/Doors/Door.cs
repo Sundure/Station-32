@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteracted
+public class Door : Structure
 {
     [SerializeField] private bool _opened;
 
     [SerializeField] private Animator _animator;
 
-    public void Interact()
+    protected override void Use()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {

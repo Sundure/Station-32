@@ -5,6 +5,8 @@ public class IgnoredRBLayers : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rb;
 
+    public void SetRB(Rigidbody rb) => _rb = rb;
+
     public void AddIgnoredRBLayer(LayerMask layer)
     {
         _rb.excludeLayers |= layer;

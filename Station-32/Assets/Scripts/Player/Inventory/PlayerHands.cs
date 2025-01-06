@@ -19,11 +19,8 @@ public class PlayerHands : MonoBehaviour
             GameObject createdItem = new();
 
             createdItem.transform.parent = transform;
-
             createdItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-
             createdItem.name = $"Slot {i + 1}";
-
             createdItem.SetActive(false);
 
             ItemSlots[i] = createdItem;
@@ -53,7 +50,7 @@ public class PlayerHands : MonoBehaviour
             _item.RB.useGravity = true;
             _item.RB.isKinematic = false;
 
-            _item.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
+            _item.OnItemDrop();
 
             Vector3 vector3 = (PlayerCamera.CreateRaycastPoint() - _item.RB.position).normalized;
 
@@ -78,7 +75,7 @@ public class PlayerHands : MonoBehaviour
             _currentItem = gameObject;
 
             _item = _currentItem.GetComponent<Item>();
-            _item.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
+            _item.OnItemPickUp();
 
             return;
         }

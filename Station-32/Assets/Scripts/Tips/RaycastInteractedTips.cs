@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RaycastInteractedTips : MonoBehaviour
 {
-    public static event Action OnRaycastHit;
+    public static event Action<InteractedType> OnRaycastHit;
     public static event Action OnRaycastUnhit;
 
     private GameObject _hitedGameObject;
@@ -13,6 +13,11 @@ public class RaycastInteractedTips : MonoBehaviour
 
     private bool _lastCheckResult;
 
+    private void Awake()
+    {
+        Inventory.OnChangeItem += Unhit;
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -21,23 +26,48 @@ public class RaycastInteractedTips : MonoBehaviour
         {
             _timer = 0;
 
-            GameObject gameObject = PlayerCamera.GetGameObjectRaycast();
-
-            if (_hitedGameObject == gameObject)
-                return;
-
-            _hitedGameObject = gameObject;
-
-            if (_hitedGameObject != null && _hitedGameObject.TryGetComponent(out IInteracted _))
-            {
-                OnRaycastHit?.Invoke();
-                _lastCheckResult = true;
-            }
-            else if (_lastCheckResult == true)
-            {
-                OnRaycastUnhit?.Invoke();
-               _lastCheckResult = false;
-            }
+            TryHit();
         }
+    }
+
+    private void TryHit()
+    {
+        GameObject gameObject = PlayerCamera.GetGameObjectRaycast();
+
+        if (_hitedGameObject == gameObject)
+            return;
+
+        _hitedGameObject = gameObject;
+
+        if (_hitedGameObject != null && _hitedGameObject.TryGetComponent(out IInteracted interacted))
+        {
+            Hit(interacted);
+        }
+        else if (_lastCheckResult == true)
+            Unhit();
+    }
+
+    private void Hit(IInteracted interacted)
+    {
+        OnRaycastHit?.Invoke(interacted.InteractedTypes);
+        _lastCheckResult = true;
+
+        if (interacted.InteractedTypes == InteractedType.Item)
+        {
+            GameObject itemObject = interacted is Component comp ? comp.gameObject : null;
+
+            itemObject.GetComponent<Item>().ItemBehaviorManager.EnableOutline();
+        }
+    }
+
+    private void Unhit()
+    {
+        OnRaycastUnhit?.Invoke();
+        _lastCheckResult = false;
+    }
+
+    private void OnDestroy()
+    {
+        Inventory.OnChangeItem -= Unhit;
     }
 }

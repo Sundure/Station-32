@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private PlayerHands _playerHands;
 
+    public static event Action OnChangeItem;
     public static event Action<int, GameObject> OnAddItem;
     public static event Action<int> OnItemDrop;
     public static event Action<int> OnSwitchItem;
@@ -45,11 +46,13 @@ public class Inventory : MonoBehaviour
     {
         if (InventoryObjects[CurrentSlot] != null)
             DropItem();
-        
+
         item.transform.parent = _playerHands.ItemSlots[CurrentSlot].transform;
         item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         item.transform.Rotate(item.GetComponent<Item>().StandartRotation);
+
+        OnChangeItem?.Invoke();
 
         InventoryObjects[CurrentSlot] = item;
 
