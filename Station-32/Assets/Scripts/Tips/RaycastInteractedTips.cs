@@ -49,15 +49,21 @@ public class RaycastInteractedTips : MonoBehaviour
 
     private void Hit(IInteracted interacted)
     {
-        OnRaycastHit?.Invoke(interacted.InteractedTypes);
-        _lastCheckResult = true;
-
         if (interacted.InteractedTypes == InteractedType.Item)
         {
             GameObject itemObject = interacted is Component comp ? comp.gameObject : null;
 
-            itemObject.GetComponent<Item>().ItemBehaviorManager.EnableOutline();
+            Item item = itemObject.GetComponent<Item>();
+
+            if (item.OnInventory)
+                return;
+
+            item.ItemBehaviorManager.EnableOutline();
         }
+
+        OnRaycastHit?.Invoke(interacted.InteractedTypes);
+        _lastCheckResult = true;
+
     }
 
     private void Unhit()

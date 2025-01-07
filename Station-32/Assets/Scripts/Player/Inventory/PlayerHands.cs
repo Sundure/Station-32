@@ -12,32 +12,38 @@ public class PlayerHands : MonoBehaviour
 
     private int _previousSlot;
 
+    private void Awake()
+    {
+        PlayerInputSystem.OnInputDownFire1 += UseItem;
+        PlayerInputSystem.OnInputFire1 += UseItem;
+    }
+
     private void Start()
     {
         for (int i = 0; i < _inventory.InventoryObjects.Length; i++)
         {
-            GameObject createdItem = new();
-
-            createdItem.transform.parent = transform;
-            createdItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            createdItem.name = $"Slot {i + 1}";
-            createdItem.SetActive(false);
-
-            ItemSlots[i] = createdItem;
-
-            SwitchItem(null);
+            CreateSlot(i);
         }
     }
 
-    private void Update()
+    private void CreateSlot(int slotCount)
+    {
+        GameObject createdItem = new();
+
+        createdItem.transform.parent = transform;
+        createdItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        createdItem.name = $"Slot {slotCount + 1}";
+        createdItem.SetActive(false);
+
+        ItemSlots[slotCount] = createdItem;
+
+        SwitchItem(null);
+    }
+
+    private void UseItem()
     {
         if (_item != null)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                _item.Use();
-            }
-        }
+            _item.Use();
     }
 
     public void DropItem()
@@ -82,5 +88,11 @@ public class PlayerHands : MonoBehaviour
 
         _currentItem = null;
         _item = null;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInputSystem.OnInputDownFire1 -= UseItem;
+        PlayerInputSystem.OnInputFire1 -= UseItem;
     }
 }
