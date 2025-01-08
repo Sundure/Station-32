@@ -348,8 +348,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ignoredRBLayers: {fileID: 1168429694115079579}
-  _onUseClip: {fileID: 8300000, guid: 2b8112025402efc43998d8631a3f58cf, type: 3}
+  _onAtackClip:
+  - {fileID: 8300000, guid: 022d517da2a95974ea66e5fbd4cd2765, type: 3}
+  - {fileID: 8300000, guid: a8b086c5091c687488b8080ee45e6f06, type: 3}
+  - {fileID: 8300000, guid: 2c75da13142a1e442afdc96989235fef, type: 3}
   _destroyTime: 10
+  _health: 2
 --- !u!114 &1168429694115079579
 MonoBehaviour:
   m_ObjectHideFlags: 0

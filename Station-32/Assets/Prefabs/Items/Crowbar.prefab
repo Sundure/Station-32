@@ -160,7 +160,7 @@ MonoBehaviour:
   _audioClips:
   - {fileID: 8300000, guid: a9ee24d9c115e0e4ca9e5a36db5880c3, type: 3}
   - {fileID: 8300000, guid: 0a3aa90c3e9ce0b448ffa0f04728048e, type: 3}
-  - {fileID: 8300000, guid: 0919fb349ba0d834499cc70eac5f3c33, type: 3}
+  - {fileID: 8300000, guid: d3aef72121cdd414f9c99cc901d6f1c6, type: 3}
   _atackInterval: 0.3
   _atackAnimCount: 3
 --- !u!95 &7492646152903600131
@@ -195,8 +195,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 7abe7a0fc8916864cad7970cc87d2c91, type: 2}
-  m_audioClip: {fileID: 8300000, guid: cdea03da9e49eb34390f64d3e679b151, type: 3}
-  m_Resource: {fileID: 8300000, guid: cdea03da9e49eb34390f64d3e679b151, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

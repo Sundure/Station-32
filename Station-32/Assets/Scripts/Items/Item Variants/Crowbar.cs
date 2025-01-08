@@ -33,15 +33,14 @@ public class Crowbar : Item
 
     private void Attack()
     {
-        if (_animator == null)
-            return;
-
         int randomNumber = GetRandomNumber(ref _lastRandomAtackNumber, _atackAnimCount, 1);
 
         _audioSource.clip = _audioClips[GetRandomNumber(ref _lastRandomAtackAudioClipNumber, _audioClips.Length -1, 0)];
         _audioSource.Play();
 
         _animator.SetInteger("Atack Anim", randomNumber);
+
+        PlayerCamera.GetComponentRaycast<ICrowbarInteractable>()?.Interact();
 
         StartCoroutine(RemoveAnim());
         StartCoroutine(WaitAtackInterval());
@@ -54,8 +53,7 @@ public class Crowbar : Item
         {
             if (lastNumber == random)
                 random = Random.Range(minNumber, maxNumber + 1);
-            else
-                break;
+            else break;
         }
 
         lastNumber = random;
