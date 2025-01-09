@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StopAudioOnPause : MonoBehaviour
+public class PauseAudioOnPause : MonoBehaviour
 {
     private AudioSource _audioSource;
     private void Start()
@@ -13,9 +13,9 @@ public class StopAudioOnPause : MonoBehaviour
     private void StopAudio(bool enabled)
     {
         if (enabled == false && _audioSource.clip != null)
-            _audioSource.Play();
+            _audioSource.UnPause();
         else if (_audioSource.clip != null)
-            _audioSource.Stop();
+            _audioSource.Pause();
     }
 
     private void OnDestroy()

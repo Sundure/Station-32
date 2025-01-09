@@ -28,11 +28,11 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
+            SwitchPause();
         }
     }
 
-    private void PauseGame()
+    private void SwitchPause()
     {
         Pause = !Pause;
 
