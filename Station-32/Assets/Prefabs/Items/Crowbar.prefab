@@ -161,6 +161,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a9ee24d9c115e0e4ca9e5a36db5880c3, type: 3}
   - {fileID: 8300000, guid: 0a3aa90c3e9ce0b448ffa0f04728048e, type: 3}
   - {fileID: 8300000, guid: d3aef72121cdd414f9c99cc901d6f1c6, type: 3}
+  _pipeAudioClip: {fileID: 8300000, guid: cdea03da9e49eb34390f64d3e679b151, type: 3}
   _atackInterval: 0.3
   _atackAnimCount: 3
 --- !u!95 &7492646152903600131
