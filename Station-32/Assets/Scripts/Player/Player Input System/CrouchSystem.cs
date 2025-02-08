@@ -8,7 +8,6 @@ public class CrouchSystem : MonoBehaviour
     [SerializeField] private float _crouchSpeedMultilier;
     [SerializeField] private float _crouchSpeed;
 
-
     private void Awake()
     {
         PlayerInputSystem.OnInputControl += SwitchCrouch;
@@ -27,7 +26,7 @@ public class CrouchSystem : MonoBehaviour
 
     private void SwitchCrouch()
     {
-        if (_playerProperties.Grounded == false)
+        if (_playerProperties.CanJump == false)
             return;
 
 

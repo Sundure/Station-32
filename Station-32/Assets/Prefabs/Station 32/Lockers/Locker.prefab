@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4457033754032099190}
-  m_Mesh: {fileID: 2414751425368093432, guid: e20c4d8349dada841b5750b32a2341dd, type: 3}
+  m_Mesh: {fileID: 2414751425368093432, guid: 00dadc4b04ed9a547846e3effedb3498, type: 3}
 --- !u!23 &215371224245950407
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 1241115580983198586}
   - component: {fileID: 8234220894347653467}
   - component: {fileID: 3041597924952053747}
-  - component: {fileID: 2070437577149899942}
   m_Layer: 0
   m_Name: Locker Door
   m_TagString: Untagged
@@ -261,7 +260,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797108931583797454}
-  m_Mesh: {fileID: 6703684653615424114, guid: e20c4d8349dada841b5750b32a2341dd, type: 3}
+  m_Mesh: {fileID: 6703684653615424114, guid: 00dadc4b04ed9a547846e3effedb3498, type: 3}
 --- !u!23 &8234220894347653467
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -328,24 +327,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020395353, y: 0.00048197687, z: 0.06555897}
   m_Center: {x: 0.001401746, y: -0.010251963, z: 0.022779483}
---- !u!65 &2070437577149899942
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797108931583797454}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0011585604, y: 0.0025963553, z: 0.005500481}
-  m_Center: {x: -0.0060002967, y: -0.011161685, z: 0.033293553}
