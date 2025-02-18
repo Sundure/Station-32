@@ -12,6 +12,7 @@ public abstract class Item : MonoBehaviour, IInteracted
     public Vector3 StandartRotation { get { return _standartRotation; } }
 
     public Rigidbody RB { get; private set; }
+    public Collider Collider { get; private set; }
 
     public ItemBehaviorManager ItemBehaviorManager { get; private set; }
 
@@ -24,13 +25,15 @@ public abstract class Item : MonoBehaviour, IInteracted
 
     private void Awake()
     {
+        Collider = GetComponent<Collider>();
+
         RB = GetComponent<Rigidbody>();
 
         RB.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
         ItemBehaviorManager = gameObject.AddComponent<ItemBehaviorManager>();
 
-        ItemBehaviorManager.IgnoredRBLayers.SetRB(RB);
+        ItemBehaviorManager.PhysicsManager.SetValues(RB,Collider);
     }
 
     public void Interact()
@@ -43,7 +46,9 @@ public abstract class Item : MonoBehaviour, IInteracted
 
     public void OnItemDrop()
     {
-        ItemBehaviorManager.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
+        ItemBehaviorManager.PhysicsManager.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
+        ItemBehaviorManager.PhysicsManager.EnableCollider();
+
         OverrideOnItemDrop();
         OnInventory = false;
         gameObject.layer = LayerMask.NameToLayer("Default");
@@ -51,7 +56,9 @@ public abstract class Item : MonoBehaviour, IInteracted
 
     public void OnItemPickUp()
     {
-        ItemBehaviorManager.IgnoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
+        ItemBehaviorManager.PhysicsManager.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
+        ItemBehaviorManager.PhysicsManager.DisableCollider();
+
         OnInventory = true;
         gameObject.layer = LayerMask.NameToLayer("Item");
     }

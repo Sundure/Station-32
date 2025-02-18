@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e69c1be0778354b804d2d595b95a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ignoredRBLayers: {fileID: 1168429694115079579}
+  _physicsManager: {fileID: 1168429694115079579}
   _onAtackClip:
   - {fileID: 8300000, guid: 022d517da2a95974ea66e5fbd4cd2765, type: 3}
   - {fileID: 8300000, guid: a8b086c5091c687488b8080ee45e6f06, type: 3}
@@ -366,7 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3fe153fe699648b7e44d849154147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 946642659694520744}
+  <RB>k__BackingField: {fileID: 946642659694520744}
+  <Collider>k__BackingField: {fileID: 0}
 --- !u!64 &7967451758657857722
 MeshCollider:
   m_ObjectHideFlags: 0

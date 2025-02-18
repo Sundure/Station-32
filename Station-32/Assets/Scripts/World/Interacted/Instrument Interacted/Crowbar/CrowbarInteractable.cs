@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
 {
-    [SerializeField] private IgnoredRBLayers _ignoredRBLayers;
+    [SerializeField] private PhysicsManager _physicsManager;
 
     [SerializeField] private AudioClip[] _onAtackClip;
 
@@ -39,7 +39,7 @@ public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
 
         _health--;
 
-        StartCoroutine(DestroyGameObject(_onAtackClip[random].length, audioObject));
+        StartCoroutine(Destroy(_onAtackClip[random].length, audioObject));
 
         if (_health == 0)
             Destroy();
@@ -49,17 +49,15 @@ public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
     {
         _interacted = false;
 
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        _physicsManager.RB.isKinematic = false;
+        _physicsManager.RB.useGravity = true;
+        _physicsManager.RB.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-
-        _ignoredRBLayers.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
-        StartCoroutine(DestroyGameObject(_destroyTime, gameObject));
+        _physicsManager.AddIgnoredRBLayer(PlayerProperties.PlayerLayer);
+        StartCoroutine(Destroy(_destroyTime, gameObject));
     }
 
-    private IEnumerator DestroyGameObject(float time, GameObject gameObject)
+    private IEnumerator Destroy(float time, GameObject gameObject)
     {
         yield return new WaitForSeconds(time);
 

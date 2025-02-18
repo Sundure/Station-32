@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ItemBehaviorManager : MonoBehaviour
 {
-    private IgnoredRBLayers _ignoredRBLayers;
-    public IgnoredRBLayers IgnoredRBLayers { get { return _ignoredRBLayers; } }
+    private PhysicsManager _physicsManager;
+    public PhysicsManager PhysicsManager { get { return _physicsManager; } }
 
     private Outline _outline;
     public Outline Outline { get { return _outline; } }
@@ -12,7 +12,7 @@ public class ItemBehaviorManager : MonoBehaviour
 
     private void Awake()
     {
-        _ignoredRBLayers = gameObject.AddComponent<IgnoredRBLayers>();
+        _physicsManager = gameObject.AddComponent<PhysicsManager>();
         _outline = gameObject.AddComponent<Outline>();
 
         _outline.enabled = false;
