@@ -33,7 +33,7 @@ public class CrowbarInteractable : MonoBehaviour, ICrowbarInteractable
 
         _lastRandomValue = random;
 
-        audioSource.outputAudioMixerGroup = AudioManager.Instance.GameAudioMixer.outputAudioMixerGroup;
+        audioSource.outputAudioMixerGroup = AudioManager.Instance.GameAudioMixerGroup;
         audioSource.PlayOneShot(_onAtackClip[random]);
 
 

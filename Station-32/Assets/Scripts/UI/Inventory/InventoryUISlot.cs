@@ -36,7 +36,7 @@ public class InventoryUISlot : MonoBehaviour
     {
         Texture2D texture = new(1, 1);
 
-        Color color = new(0.5f, 0.5f, 0.5f, 0.3f);
+        Color color = new(0.5f, 0.5f, 0.5f, 0.2f);
 
         texture.SetPixel(0, 0, color);
 

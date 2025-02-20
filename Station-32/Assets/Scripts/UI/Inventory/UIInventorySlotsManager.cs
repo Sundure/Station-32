@@ -36,7 +36,7 @@ public class UIInventorySlotsManager : MonoBehaviour
 
         Texture2D texture2D = new(1, 1);
 
-        Color color = new(1, 1, 0.8f, 0.3f);
+        Color color = new(1, 1, 1, 0.2f);
 
         texture2D.SetPixel(0, 0, color);
 
