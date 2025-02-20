@@ -1,11 +1,13 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class Door : Structure
+public class DoorVector3 : Structure
 {
     [Header("Values")]
     [SerializeField] private bool _open;
 
+    [Range(0, 360)][SerializeField] private float _targetX;
+    [Range(0, 360)][SerializeField] private float _targetY;
     [Range(0, 360)][SerializeField] private float _targetZ;
 
     [Range(0, 0.99f)][SerializeField] private float _rotationTime;
@@ -22,10 +24,10 @@ public class Door : Structure
     [Header("Components")]
     [SerializeField] private AudioSource _audioSource;
 
-    private float _velocity;
+    private Vector3 _velocity;
 
-    private float _angle;
-    private float _targetAngle;
+    private Vector3 _angle;
+    private Vector3 _targetAngle;
 
     private float _previousAnimationPrecent;
 
@@ -33,25 +35,25 @@ public class Door : Structure
     {
         enabled = false;
 
-        _angle = _doorAxis.localRotation.eulerAngles.z;
+        _angle = _doorAxis.localRotation.eulerAngles;
     }
 
     private void Update()
     {
-        float precent = GetValuePrecent(transform.localEulerAngles.z, _targetAngle);
+        float precent = GetValuePrecent(transform.localEulerAngles.z, _targetAngle.z);
 
         if (precent >= 99.7f || _previousAnimationPrecent > precent && _previousAnimationPrecent != 0)
         {
-            _doorAxis.localRotation = Quaternion.Euler(_doorAxis.localRotation.x, _doorAxis.localRotation.y, _targetAngle);
+            _doorAxis.localRotation = Quaternion.Euler(_targetAngle);
 
             enabled = false;
 
             return;
         }
 
-        _angle = Mathf.SmoothDamp(_angle, _targetAngle, ref _velocity, _rotationTime);
+        _angle = Vector3.SmoothDamp(_angle, _targetAngle, ref _velocity, _rotationTime);
 
-        _doorAxis.localRotation = Quaternion.Euler(_doorAxis.localRotation.x, _doorAxis.localRotation.y, _angle);
+        _doorAxis.localRotation = Quaternion.Euler(_angle);
 
         _previousAnimationPrecent = precent;
     }
@@ -67,11 +69,11 @@ public class Door : Structure
         _open = !_open;
 
         if (_open)
-            _targetAngle = _targetZ;
+            _targetAngle = new Vector3(_targetX, _targetY, _targetZ);
         else
-            _targetAngle = 0;
+            _targetAngle = Vector3.zero;
 
-        _velocity = 0;
+        _velocity = Vector3.zero;
 
         _previousAnimationPrecent = 0;
 
