@@ -1,14 +1,20 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class Door : Structure
 {
-    [SerializeField] private bool _opened; // Close-Open Door State
+    [Header("Values")]
+    [SerializeField] private bool _open;
 
+    [Range(0, 360)][SerializeField] private float _targetX;
+    [Range(0, 360)][SerializeField] private float _targetY;
+    [Range(0, 360)][SerializeField] private float _targetZ;
+
+    [Range(0, 0.99f)][SerializeField] private float _rotationTime;
+
+    [SerializeField] private Transform _doorAxis;
     [Header("Door States")]
     [SerializeField] private bool _canOpen;
-
-    private bool _canUse = true;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip _openDoorClip;
@@ -17,50 +23,86 @@ public class Door : Structure
 
     [Header("Components")]
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private Animator _animator;
+
+    private Vector3 _velocity;
+
+    private Vector3 _angle;
+    private Vector3 _targetAngle;
+
+    private float _previousAnimationPrecent;
+
+    private void Awake()
+    {
+        enabled = false;
+
+        _angle = _doorAxis.localRotation.eulerAngles;
+        SetAngle();
+    }
+
+    private void Update()
+    {
+        float precent = GetValuePrecent(transform.localEulerAngles.z, _targetAngle.z);
+
+        if (precent >= 99.7f || _previousAnimationPrecent > precent && _previousAnimationPrecent != 0)
+        {
+            _doorAxis.localRotation = Quaternion.Euler(_targetAngle);
+
+            enabled = false;
+
+            return;
+        }
+
+        _angle = Vector3.SmoothDamp(_angle, _targetAngle, ref _velocity, _rotationTime);
+
+        _doorAxis.localRotation = Quaternion.Euler(_angle);
+
+        _previousAnimationPrecent = precent;
+    }
 
     protected override void Use()
     {
-        if (_canUse == false) return;
-
         if (_canOpen == false)
         {
             _audioSource.PlayOneShot(_tryOpenDoorClip);
-            StartCoroutine(WaitEndOfAnimation(_tryOpenDoorClip.length));
+            return;
         }
 
-        else if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-        {
-            _opened = !_opened;
+        _open = !_open;
 
-            if (_opened)
-            {
-                _animator.SetTrigger("Open");
-                _audioSource.PlayOneShot(_openDoorClip);
-            }
-            else
-            {
-                _animator.SetTrigger("Close");
-                _audioSource.PlayOneShot(_closeDoorClip);
-            }
+        if (_open)
+            _targetAngle = SetAngle();
+        else
+            _targetAngle = Vector3.zero;
 
-            _canUse = false;
+        _velocity = Vector3.zero;
 
-            StartCoroutine(GetAnimationTime()); // Idk How To Return Value In Coroutine 
-        }
+        _previousAnimationPrecent = 0;
+
+        enabled = true;
+
+        StopAllCoroutines();
+
+        StartCoroutine(StopAnimation());
+    }
+    private Vector3 SetAngle()
+    {
+        return new Vector3(_targetX, _targetY, _targetZ);
     }
 
-    private IEnumerator GetAnimationTime()
+    private float GetValuePrecent(float firstValue, float secondValue) // get precent betwen first and second value
     {
-        yield return new WaitForEndOfFrame();
+        if (secondValue == 0)
+            secondValue = 0.1f;
 
-        StartCoroutine(WaitEndOfAnimation(_animator.GetCurrentAnimatorClipInfo(0).Length));
+        if (firstValue > secondValue)
+            return (secondValue / firstValue) * 100;
+
+        return (firstValue / secondValue) * 100;
     }
-
-    private IEnumerator WaitEndOfAnimation(float time)
+    private IEnumerator StopAnimation()
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(10);
 
-        _canUse = true;
+        enabled = false;
     }
 }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724607477183044944}
-  - component: {fileID: 857446859656070272}
   - component: {fileID: 3694727595118139190}
   m_Layer: 0
   m_Name: Locker Door Axis
@@ -34,28 +33,6 @@ Transform:
   - {fileID: 3813140536064163112}
   m_Father: {fileID: 3789148049947953083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &857446859656070272
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127458128357943952}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0adef7d98cb8aca4dbdb7a740aae130a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &3694727595118139190
 AudioSource:
   m_ObjectHideFlags: 0
@@ -488,15 +465,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797108931583797454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9bb2e48d1fe38f4083a67861e40685a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _opened: 0
+  _open: 0
+  _targetX: 0
+  _targetY: 0
+  _targetZ: 126
+  _rotationTime: 0.632
+  _doorAxis: {fileID: 724607477183044944}
   _canOpen: 1
   _openDoorClip: {fileID: 0}
   _closeDoorClip: {fileID: 0}
   _tryOpenDoorClip: {fileID: 0}
   _audioSource: {fileID: 3694727595118139190}
-  _animator: {fileID: 857446859656070272}
