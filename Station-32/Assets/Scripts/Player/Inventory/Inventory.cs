@@ -16,12 +16,12 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        InventoryInputSystem.ChangeItemSlot += SwitchItem;
-        InventoryInputSystem.DropItem += DropItem;
+        PlayerInputSystem.OnInputNumber += SwitchItem;
+        PlayerInputSystem.OnInputDrop += DropItem;
         Item.AddItem += ChangeItem;
     }
 
-    private void SwitchItem(int slot)
+    private void SwitchItem(byte slot)
     {
         if (CurrentSlot == -1 || slot > InventoryObjects.Length)
         {
@@ -75,8 +75,8 @@ public class Inventory : MonoBehaviour
 
     private void OnDestroy()
     {
-        InventoryInputSystem.ChangeItemSlot -= SwitchItem;
-        InventoryInputSystem.DropItem -= DropItem;
+        PlayerInputSystem.OnInputNumber -= SwitchItem;
+        PlayerInputSystem.OnInputDrop -= DropItem;
         Item.AddItem -= ChangeItem;
     }
 

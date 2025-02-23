@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2519732697960228046}
   - component: {fileID: 8519853598607413211}
-  - component: {fileID: 3360329167972394461}
   - component: {fileID: 253089389947312649}
   - component: {fileID: 3236108241187414273}
-  - component: {fileID: 784410260260760609}
+  - component: {fileID: 4309329687671912024}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -57,18 +56,6 @@ MonoBehaviour:
   Jumped: 0
   CanJump: 0
   _playerCollider: {fileID: 2796388227344581147}
---- !u!114 &3360329167972394461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711621806118487436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9863c54ed85a534784c4ac7b4f3240c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &253089389947312649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerProperties: {fileID: 8519853598607413211}
   _characterController: {fileID: 2796388227344581147}
---- !u!114 &784410260260760609
+--- !u!114 &4309329687671912024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

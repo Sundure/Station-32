@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class InteractSystem : MonoBehaviour
 {
-    private void Update()
-    {
-        if (Input.GetButtonDown("Interact"))
-        {
-            IInteracted interacted = PlayerCamera.GetComponentRaycast<IInteracted>();
+    private void Awake() => PlayerInputSystem.OnInputInteract += Interact;
 
-            interacted?.Interact();
-        }
+    private void Interact()
+    {
+        IInteracted interacted = PlayerCamera.GetComponentRaycast<IInteracted>();
+
+        interacted?.Interact();
     }
+
+    private void OnDestroy() => PlayerInputSystem.OnInputInteract -= Interact;
 }
