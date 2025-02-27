@@ -26,7 +26,7 @@ public class Crowbar : Item
         if (_readyToAtack)
             Attack();
     }
-    protected override void OverrideOnItemDrop()
+    protected override void OnItemDrop()
     {
         _animator.enabled = false;
     }

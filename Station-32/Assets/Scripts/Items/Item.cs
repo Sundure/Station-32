@@ -23,7 +23,7 @@ public abstract class Item : MonoBehaviour, IInteracted
 
     public static event Action<GameObject> AddItem;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Collider = GetComponent<Collider>();
 
@@ -44,12 +44,12 @@ public abstract class Item : MonoBehaviour, IInteracted
         RB.isKinematic = true;
     }
 
-    public void OnItemDrop()
+    public void DeffaultOnItemDrop()
     {
         ItemBehaviorManager.PhysicsManager.AddIgnoredRBLayer(PlayerProperties.PlayerLayer, 0.5f);
         ItemBehaviorManager.PhysicsManager.EnableCollider();
 
-        OverrideOnItemDrop();
+        OnItemDrop();
         OnInventory = false;
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
@@ -64,5 +64,5 @@ public abstract class Item : MonoBehaviour, IInteracted
     }
 
     public abstract void Use();
-    protected abstract void OverrideOnItemDrop();
+    protected abstract void OnItemDrop();
 }

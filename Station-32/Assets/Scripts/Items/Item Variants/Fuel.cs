@@ -1,7 +1,7 @@
 
 public class Fuel : Item
 {
-    protected override void OverrideOnItemDrop()
+    protected override void OnItemDrop()
     {
     }
 

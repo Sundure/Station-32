@@ -56,7 +56,7 @@ public class PlayerHands : MonoBehaviour
             _item.RB.useGravity = true;
             _item.RB.isKinematic = false;
 
-            _item.OnItemDrop();
+            _item.DeffaultOnItemDrop();
 
             Vector3 vector3 = (PlayerCamera.CreateRaycastPoint() - _item.RB.position).normalized;
 
