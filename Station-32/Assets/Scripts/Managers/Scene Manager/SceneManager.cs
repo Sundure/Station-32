@@ -9,7 +9,7 @@ public class SceneManager : MonoBehaviour
     public static event Action OnMenuSceneLoaded;
     public static event Action OnNonMenuSceneLoaded;
 
-    private const string MenuScene = "Menu";
+    private const string MENU_SCENE = "Menu";
 
 
     private void Awake()
@@ -68,7 +68,7 @@ public class SceneManager : MonoBehaviour
 
     private void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.name == MenuScene)
+        if (scene.name == MENU_SCENE)
             OnMenuSceneLoaded?.Invoke();
         else
             OnNonMenuSceneLoaded?.Invoke();

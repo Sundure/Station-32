@@ -17,9 +17,9 @@ public class PlayerProperties : MonoBehaviour
 
     public readonly float PlayerFallSpeed = 8;
 
-    public const float InteractRange = 2f;
+    public const float INTERACT_RANGE = 2f;
 
-    public const int MaxInventorySlot = 5;
+    public const int MAX_INVENTORY_SLOT = 5;
 
 
     public static LayerMask PlayerLayer { get; private set; }

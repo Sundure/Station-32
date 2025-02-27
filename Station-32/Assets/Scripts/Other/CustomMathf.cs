@@ -24,7 +24,7 @@ public struct CustomMathf
 
     /// <summary>
     /// Get Precent Betwen First And Second Value.
-    /// If First Value More That First Returns Precent Betwen Second And First Value
+    /// If First Value More That Second Returns Precent Betwen Second And First Value
     /// </summary>
     /// <param name="firstValue"></param>
     /// <param name="secondValue"></param>
@@ -39,7 +39,7 @@ public struct CustomMathf
 
     /// <summary>
     /// Get Precent Betwen First And Second Value.
-    /// If First Value More That First Returns Precent Betwen Second And First Value
+    /// If First Value More That Second Returns Precent Betwen Second And First Value
     /// </summary>
     /// <param name="firstValue"></param>
     /// <param name="secondValue"></param>

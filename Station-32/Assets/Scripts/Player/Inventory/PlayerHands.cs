@@ -4,7 +4,7 @@ public class PlayerHands : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
 
-    public GameObject[] ItemSlots = new GameObject[PlayerProperties.MaxInventorySlot];
+    public GameObject[] ItemSlots = new GameObject[PlayerProperties.MAX_INVENTORY_SLOT];
 
     private GameObject _currentItem;
 

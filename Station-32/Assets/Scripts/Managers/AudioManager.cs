@@ -9,9 +9,9 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup GameAudioMixerGroup { get;private set; }
     public AudioMixerGroup MusicAudioMixerGroup { get;private set; }
 
-    private const float _minVolume = -40;
-    private const float _maxVolume = 20;
-    private const float _silentVolume = -80;
+    private const float MIN_VOLUME = -40;
+    private const float MAX_VOLUME = 20;
+    private const float SILENT_VOLUME = -80;
 
     private float _volumeScale;
 
@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        float db = Mathf.Log10(Mathf.Clamp(GameAudio.GameAudioValue, 0.000001f, 1)) * _maxVolume;
+        float db = Mathf.Log10(Mathf.Clamp(GameAudio.GameAudioValue, 0.000001f, 1)) * MAX_VOLUME;
 
         _gameAudioMixer.SetFloat("Audio", db * _volumeScale);
     }
@@ -65,9 +65,9 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        float db = (GameAudio.GameAudioValue * _volumeScale * (_maxVolume - _minVolume)) + _minVolume;
+        float db = (GameAudio.GameAudioValue * _volumeScale * (MAX_VOLUME - MIN_VOLUME)) + MIN_VOLUME;
 
-        db = db == _minVolume ? -_silentVolume : db;
+        db = db == MIN_VOLUME ? -SILENT_VOLUME : db;
 
         _gameAudioMixer.SetFloat("Audio", db);
     }

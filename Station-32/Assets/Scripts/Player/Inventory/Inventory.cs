@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public readonly GameObject[] InventoryObjects = new GameObject[PlayerProperties.MaxInventorySlot];
+    public readonly GameObject[] InventoryObjects = new GameObject[PlayerProperties.MAX_INVENTORY_SLOT];
 
     public int CurrentSlot { get; private set; } = 0;
 

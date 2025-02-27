@@ -45,7 +45,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.INTERACT_RANGE))
         {
             return hit.collider.gameObject;
         }
@@ -61,7 +61,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        return ray.GetPoint(PlayerProperties.InteractRange);
+        return ray.GetPoint(PlayerProperties.INTERACT_RANGE);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Ray ray = _camera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
 
-        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.InteractRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, PlayerProperties.INTERACT_RANGE))
         {
            if (hit.collider.TryGetComponent(out TComponent component))
            {

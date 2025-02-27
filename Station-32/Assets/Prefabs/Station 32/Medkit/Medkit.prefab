@@ -121,14 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0615865931115804ba363b5a63730308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _negativeRotation: 0
   _open: 0
   _animationAxis: 82
   _rotationTime: 0.265
   _minSpeed: 0.3
   _doorAxis: {fileID: 6115085310571167064}
-  _targetXAxis: 0
-  _targetYAxis: 0
-  _targetZAxis: 1
+  _rotationAxis: 2
   _canOpen: 1
   _openDoorClip: {fileID: 0}
   _closeDoorClip: {fileID: 0}
