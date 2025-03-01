@@ -22,8 +22,6 @@ public class PlayerInputSystem : MonoBehaviour
         if (PauseManager.Pause)
             return;
 
-        print(Time.timeScale);
-
         GetInputSystemInput();
         GetKeyDownInput();
         GetAxisInput();
