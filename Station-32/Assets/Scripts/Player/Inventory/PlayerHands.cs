@@ -50,7 +50,6 @@ public class PlayerHands : MonoBehaviour
     {
         if (_item != null)
         {
-            Debug.Log("Drop");
             _currentItem.transform.parent = null;
 
             _item.RB.useGravity = true;
