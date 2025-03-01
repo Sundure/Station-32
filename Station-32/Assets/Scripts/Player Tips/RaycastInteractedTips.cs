@@ -51,7 +51,7 @@ public class RaycastInteractedTips : MonoBehaviour
     {
         if (interacted.InteractedTypes == InteractedType.Item)
         {
-            GameObject itemObject = interacted is Component comp ? comp.gameObject : null;
+            GameObject itemObject = interacted is Component comp ? comp.gameObject : null; //Get GameObject From IInteracted Based Class
 
             Item item = itemObject.GetComponent<Item>();
 

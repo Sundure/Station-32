@@ -667,7 +667,7 @@ Transform:
   m_GameObject: {fileID: 6489850992758547387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.809, z: 0}
+  m_LocalPosition: {x: 0, y: -0.585, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -820,13 +820,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerProperties: {fileID: 8519853598607413211}
   _player: {fileID: 3236108241187414273}
-  _playerFeet: {fileID: 2759951486218268894}
-  _groundCheckRadius: 0.3
-  _jumpCheckRadius: 0.5
+  _playerSphereCheckPoint: {fileID: 2759951486218268894}
   _ignoredLayer:
     serializedVersion: 2
     m_Bits: 8
-  _speedDebuff: 0.8
+  _fallSpeedDebuff: 0.8
 --- !u!114 &681126040997837630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,10 +855,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed96dfa657d24a14d9ba6aa52121408b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 3236108241187414273}
   _playerProperties: {fileID: 8519853598607413211}
   _crouchVelocity: 0.5
-  _crouchSpeedMultilier: 0.5
   _crouchSpeed: 2
+  _crouchSpeedMultilier: 0.5
 --- !u!1 &7382340562801675511
 GameObject:
   m_ObjectHideFlags: 0

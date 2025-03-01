@@ -1,12 +1,18 @@
+using System;
 using UnityEngine;
 
 public class CrouchSystem : MonoBehaviour
 {
+    [SerializeField] private Player _player;
     [SerializeField] private PlayerProperties _playerProperties;
 
     [SerializeField] private float _crouchVelocity;
-    [SerializeField] private float _crouchSpeedMultilier;
     [SerializeField] private float _crouchSpeed;
+
+    [Header("Player Speed Multiplier")]
+    [SerializeField] private float _crouchSpeedMultilier;
+
+    public event Action<bool> PlayerCrouch;
 
     private void Awake()
     {
@@ -26,7 +32,7 @@ public class CrouchSystem : MonoBehaviour
 
     private void SwitchCrouch()
     {
-        if (_playerProperties.CanJump == false)
+        if (_playerProperties.Grounded == false)
             return;
 
 
@@ -50,6 +56,8 @@ public class CrouchSystem : MonoBehaviour
 
         PlayerMoveSystem.AddSpeedMultipler(this, _crouchSpeedMultilier);
 
+        PlayerCrouch?.Invoke(_playerProperties.Crouch);
+
         enabled = true;
     }
 
@@ -58,6 +66,8 @@ public class CrouchSystem : MonoBehaviour
         _playerProperties.Crouch = false;
 
         PlayerMoveSystem.RemoveSpeedMultipler(this);
+
+        PlayerCrouch?.Invoke(_playerProperties.Crouch);
 
         enabled = true;
     }
@@ -68,7 +78,7 @@ public class CrouchSystem : MonoBehaviour
 
         vector3.y += Time.deltaTime * _crouchSpeed;
 
-        float previousHeight = transform.localScale.y;
+        float previousHeight = _playerProperties.PlayerCollider.bounds.size.y;
 
         transform.localScale = vector3;
 
@@ -81,13 +91,9 @@ public class CrouchSystem : MonoBehaviour
             enabled = false;
         }
 
-        float sizeChange = previousHeight - vector3.y;
+        float moveDistance = (_playerProperties.PlayerCollider.bounds.size.y - previousHeight) / 2;
 
-        vector3 = transform.position;
-
-        vector3.y -= sizeChange;
-
-        transform.position = vector3;
+        _player.CharacterController.Move(new(0, moveDistance, 0));
     }
 
     private void Crouch()
@@ -96,7 +102,7 @@ public class CrouchSystem : MonoBehaviour
 
         vector3.y -= Time.deltaTime * _crouchSpeed;
 
-        float previousHeight = transform.localScale.y;
+        float previousHeight = _playerProperties.PlayerCollider.bounds.size.y;
 
         transform.localScale = vector3;
 
@@ -109,13 +115,9 @@ public class CrouchSystem : MonoBehaviour
             enabled = false;
         }
 
-        float sizeChange = previousHeight - vector3.y;
+        float moveDistance = (_playerProperties.PlayerCollider.bounds.size.y - previousHeight) / 2;
 
-        vector3 = transform.position;
-
-        vector3.y -= sizeChange;
-
-        transform.position = vector3;
+        _player.CharacterController.Move(new(0, moveDistance, 0));
     }
 
     private void OnDestroy()
