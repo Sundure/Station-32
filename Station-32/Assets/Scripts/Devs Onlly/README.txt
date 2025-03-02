@@ -1,1 +1,0 @@
-All of this files must be deleted on final build
