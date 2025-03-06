@@ -9,23 +9,23 @@ public class LightSystemCustomEditor : Editor
     private SerializedProperty _light;
     private SerializedProperty _enabledLightMaterial;
     private SerializedProperty _disabledLightMaterial;
-    private SerializedProperty _lampGlassGameObject;
+    private SerializedProperty _lampTextureObject;
 
     private void OnEnable()
     {
         _floatList = serializedObject.FindProperty("_lightSwitchInterval");                 //Change String Values If You Want To Change LightSystem Variable Names
-        _boolList = serializedObject.FindProperty("_enabled");                              
+        _boolList = serializedObject.FindProperty("_enabled");    
         _light = serializedObject.FindProperty("_light");
         _enabledLightMaterial = serializedObject.FindProperty("_enabledLightMaterial");
         _disabledLightMaterial = serializedObject.FindProperty("_disabledLightMaterial");
-        _lampGlassGameObject = serializedObject.FindProperty("_lampGlass");
+        _lampTextureObject = serializedObject.FindProperty("_lampTextureObject");
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(_lampGlassGameObject, new GUIContent("Lamp Glass"));
+        EditorGUILayout.PropertyField(_lampTextureObject, new GUIContent("Lamp Texture Object"));
 
         EditorGUILayout.Space();
 
@@ -38,6 +38,15 @@ public class LightSystemCustomEditor : Editor
 
         EditorGUILayout.Space();
 
+        CreateLightBehaviorList();
+
+        EditorGUILayout.Space();
+
+        serializedObject.ApplyModifiedProperties();
+    }
+
+    private void CreateLightBehaviorList()
+    {
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
         int count = _floatList.arraySize;
@@ -81,7 +90,5 @@ public class LightSystemCustomEditor : Editor
             _floatList.arraySize--;
             _boolList.arraySize--;
         }
-
-        serializedObject.ApplyModifiedProperties();
     }
 }

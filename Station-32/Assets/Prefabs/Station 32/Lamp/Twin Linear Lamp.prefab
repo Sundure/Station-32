@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5160934061727615042}
-  - component: {fileID: 6961583220898581515}
   - component: {fileID: 1606075811938228450}
   - component: {fileID: 607051927268335888}
   m_Layer: 0
@@ -34,26 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1837075083656439892}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6961583220898581515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496023617615609576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd21bf16e79a3d0428889d7b39b21b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lightSwitchInterval:
-  - 0.5
-  - 0.5
-  _enabled: 0001
-  _light: {fileID: 1606075811938228450}
-  _enabledLightMaterial: {fileID: 2100000, guid: 0edbc4a814ffbb94fbded2ffd7750e86, type: 2}
-  _disabledLightMaterial: {fileID: 2100000, guid: 64ef7e553e655ef4dbb98265247933aa, type: 2}
-  _lampGlass: {fileID: 5733388604808961909}
 --- !u!108 &1606075811938228450
 Light:
   m_ObjectHideFlags: 0
@@ -61,7 +40,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3496023617615609576}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,6 +132,7 @@ GameObject:
   - component: {fileID: 9062073564812359541}
   - component: {fileID: 1701648182037152531}
   - component: {fileID: 1563878014447529368}
+  - component: {fileID: 5009879876479747253}
   m_Layer: 0
   m_Name: Twin Linear Lamp
   m_TagString: Untagged
@@ -229,6 +209,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5009879876479747253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983969028217077742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd21bf16e79a3d0428889d7b39b21b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightSwitchInterval: []
+  _enabled: 
+  _light: {fileID: 1606075811938228450}
+  _enabledLightMaterial: {fileID: 2100000, guid: 0edbc4a814ffbb94fbded2ffd7750e86, type: 2}
+  _disabledLightMaterial: {fileID: 2100000, guid: 64ef7e553e655ef4dbb98265247933aa, type: 2}
+  _lampGlass: {fileID: 5733388604808961909}
 --- !u!1 &5733388604808961909
 GameObject:
   m_ObjectHideFlags: 0
