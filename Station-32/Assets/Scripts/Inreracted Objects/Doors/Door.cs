@@ -109,7 +109,9 @@ public class Door : Structure
     {
         if (_canOpen == false)
         {
-            _audioSource.PlayOneShot(_tryOpenDoorClip);
+            _audioSource.clip = _tryOpenDoorClip;
+            _audioSource.Play();
+
             return;
         }
 
@@ -117,7 +119,9 @@ public class Door : Structure
 
         if (_open)
         {
-            _audioSource.PlayOneShot(_openDoorClip);
+            _audioSource.clip = _openDoorClip;
+            _audioSource.Play();
+
             _targetAngle = _animationAxis;
         }
         else

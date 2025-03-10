@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 9115121714518583874}
   - component: {fileID: 6031589786303743895}
   - component: {fileID: 4962896727199500875}
+  - component: {fileID: 2423339524303901159}
+  - component: {fileID: 5602974872450078430}
   m_Layer: 0
   m_Name: Locker Door
   m_TagString: Untagged
@@ -141,10 +143,10 @@ MonoBehaviour:
   _doorAxis: {fileID: 514981975175014931}
   _rotationAxis: 2
   _canOpen: 1
-  _openDoorClip: {fileID: 0}
-  _closeDoorClip: {fileID: 8300000, guid: e3c735b2981d4b94b9cb71baccb99a0f, type: 3}
+  _openDoorClip: {fileID: 8300000, guid: e3c735b2981d4b94b9cb71baccb99a0f, type: 3}
+  _closeDoorClip: {fileID: 8300000, guid: 810a0c73f8378d94585d2b00407deb41, type: 3}
   _tryOpenDoorClip: {fileID: 0}
-  _audioSource: {fileID: 7125364834025735718}
+  _audioSource: {fileID: 2423339524303901159}
 --- !u!65 &6031589786303743895
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -187,6 +189,115 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0026569366, y: 0.002112301, z: 0.009740289}
   m_Center: {x: -0.011404444, y: -0.024799593, z: 0.03723226}
+--- !u!82 &2423339524303901159
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073367851582613882}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7abe7a0fc8916864cad7970cc87d2c91, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9959717
+      inSlope: -1.476393
+      outSlope: -1.476393
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1609589
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.05001994
+      outSlope: -0.05001994
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5602974872450078430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073367851582613882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2076414e1cf1bd9459b942073e6cf3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2975166237742250878
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +313,7 @@ GameObject:
   - component: {fileID: 7125364834025735718}
   - component: {fileID: 7115486242183924931}
   - component: {fileID: 7034518888213382854}
+  - component: {fileID: 5383905410220889837}
   m_Layer: 0
   m_Name: Locker Door
   m_TagString: Untagged
@@ -297,8 +409,8 @@ MonoBehaviour:
   _doorAxis: {fileID: 2844212252439628765}
   _rotationAxis: 2
   _canOpen: 1
-  _openDoorClip: {fileID: 0}
-  _closeDoorClip: {fileID: 8300000, guid: e3c735b2981d4b94b9cb71baccb99a0f, type: 3}
+  _openDoorClip: {fileID: 8300000, guid: e3c735b2981d4b94b9cb71baccb99a0f, type: 3}
+  _closeDoorClip: {fileID: 8300000, guid: 810a0c73f8378d94585d2b00407deb41, type: 3}
   _tryOpenDoorClip: {fileID: 0}
   _audioSource: {fileID: 7125364834025735718}
 --- !u!82 &7125364834025735718
@@ -310,10 +422,10 @@ AudioSource:
   m_GameObject: {fileID: 2975166237742250878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7abe7a0fc8916864cad7970cc87d2c91, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -323,9 +435,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -334,22 +446,22 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.9959717
+      inSlope: -1.476393
+      outSlope: -1.476393
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.1609589
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.05001994
+      outSlope: -0.05001994
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -358,7 +470,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -440,6 +552,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.002656936, y: 0.0019674622, z: 0.009740288}
   m_Center: {x: -0.011404444, y: -0.0051347427, z: 0.03723226}
+--- !u!114 &5383905410220889837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975166237742250878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2076414e1cf1bd9459b942073e6cf3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4801964851485557024
 GameObject:
   m_ObjectHideFlags: 0

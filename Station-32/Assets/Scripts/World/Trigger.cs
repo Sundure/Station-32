@@ -6,23 +6,25 @@ public class Trigger : MonoBehaviour
 {
     [SerializeField] private float _invokeTime;
 
+    [SerializeField] private bool _waitTime;
+
     [Header("Events")]
-    [SerializeField] private UnityEvent UnityEvent;
+    [SerializeField] private UnityEvent _unityEvent;
 
-    public void InvokeTrigger()
+    public void InvokeTrigger() => _unityEvent.Invoke();
+
+    public void InvokeTimeTrigger() => StartCoroutine(InvokeTrigger(_invokeTime));
+
+    private IEnumerator InvokeTrigger(float timeDelay)
     {
-        StartCoroutine(TiggerCoroutine());
-    }
+        yield return new WaitForSeconds(timeDelay);
 
-    private IEnumerator TiggerCoroutine()
-    {
-        yield return new WaitForSeconds(_invokeTime);
-
-        UnityEvent.Invoke();
+        _unityEvent.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(TiggerCoroutine());
+        if (_waitTime)
+            StartCoroutine(InvokeTrigger(_invokeTime));
     }
 }
