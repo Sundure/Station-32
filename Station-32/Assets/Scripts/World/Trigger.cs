@@ -26,5 +26,9 @@ public class Trigger : MonoBehaviour
     {
         if (_waitTime)
             StartCoroutine(InvokeTrigger(_invokeTime));
+        else
+            InvokeTrigger();
+
+        
     }
 }
