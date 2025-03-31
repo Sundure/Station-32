@@ -1,46 +1,41 @@
 using UnityEngine;
 using UnityEditor;
-
+using System;
+using System.Reflection;
+using System.Collections.Generic;
 [CustomEditor(typeof(LightSystem))]
 public class LightSystemCustomEditor : Editor
 {
-    private SerializedProperty _floatList;
-    private SerializedProperty _boolList;
-    private SerializedProperty _light;
-    private SerializedProperty _enabledLightMaterial;
-    private SerializedProperty _disabledLightMaterial;
-    private SerializedProperty _lampTextureObject;
+    private List<float> _lightSwitchInterval;
+    private List<bool> _enabled;
 
     private void OnEnable()
     {
-        _floatList = serializedObject.FindProperty("_lightSwitchInterval");                 //Change String Values If You Want To Change LightSystem Variable Names
-        _boolList = serializedObject.FindProperty("_enabled");    
-        _light = serializedObject.FindProperty("_light");
-        _enabledLightMaterial = serializedObject.FindProperty("_enabledLightMaterial");
-        _disabledLightMaterial = serializedObject.FindProperty("_disabledLightMaterial");
-        _lampTextureObject = serializedObject.FindProperty("_lampTextureObject");
+        Type type = typeof(LightSystem);
+
+        FieldInfo info = type.GetField("_lightSwitchInterval", BindingFlags.NonPublic | BindingFlags.Instance); //Change String Values If You Want To Change LightSystem Variable Names
+
+        _lightSwitchInterval = (List<float>)info.GetValue(target);
+
+        info = type.GetField("_enabled", BindingFlags.NonPublic | BindingFlags.Instance); //Change String Values If You Want To Change LightSystem Variable Names
+
+        _enabled = (List<bool>)info.GetValue(target);
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(_lampTextureObject, new GUIContent("Lamp Texture Object"));
-
-        EditorGUILayout.Space();
-
-        EditorGUILayout.PropertyField(_light, new GUIContent("Light"));
-
-        EditorGUILayout.Space();
-
-        EditorGUILayout.PropertyField(_enabledLightMaterial, new GUIContent("Enabled Light Material"));
-        EditorGUILayout.PropertyField(_disabledLightMaterial, new GUIContent("Disabled Light Material"));
-
-        EditorGUILayout.Space();
+        DrawDefaultInspector();
 
         CreateLightBehaviorList();
 
-        EditorGUILayout.Space();
+        Type type = typeof(LightSystem);
+
+        type.GetField("_lightSwitchInterval", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(target, _lightSwitchInterval);
+        type.GetField("_enabled", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(target, _enabled);
+
+        EditorUtility.SetDirty(target);
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -49,30 +44,25 @@ public class LightSystemCustomEditor : Editor
     {
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
-        int count = _floatList.arraySize;
-
         EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.LabelField($"List Size: {count}", GUILayout.Width(110));
+        EditorGUILayout.LabelField($"List Size: {_lightSwitchInterval.Count}", GUILayout.Width(110));
 
         EditorGUILayout.EndHorizontal();
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < _lightSwitchInterval.Count; i++)
         {
-            SerializedProperty floatElement = _floatList.GetArrayElementAtIndex(i);
-            SerializedProperty boolElement = _boolList.GetArrayElementAtIndex(i);
-
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.LabelField($"Element {i}", GUILayout.Width(80));
 
             EditorGUILayout.LabelField("Time", GUILayout.Width(30));
 
-            floatElement.floatValue = EditorGUILayout.FloatField(floatElement.floatValue, GUILayout.Width(100));
+            _lightSwitchInterval[i] = EditorGUILayout.FloatField(_lightSwitchInterval[i], GUILayout.Width(100));
 
             EditorGUILayout.LabelField("Light", GUILayout.Width(30));
 
-            boolElement.boolValue = EditorGUILayout.Toggle(boolElement.boolValue);
+            _enabled[i] = EditorGUILayout.Toggle(_enabled[i]);
 
             EditorGUILayout.EndHorizontal();
         }
@@ -81,14 +71,20 @@ public class LightSystemCustomEditor : Editor
 
         if (GUILayout.Button("Add Element"))
         {
-            _floatList.arraySize++;
-            _boolList.arraySize++;
+            if (_lightSwitchInterval.Count == 0)
+            {
+                _lightSwitchInterval.Add(0);
+                _enabled.Add(true);
+                return;
+            }
+            _lightSwitchInterval.Add(_lightSwitchInterval[^1]);
+            _enabled.Add(!_enabled[^1]);
         }
 
-        if (count > 0 && GUILayout.Button("Delete Element"))
+        if (_lightSwitchInterval.Count > 0 && GUILayout.Button("Delete Element"))
         {
-            _floatList.arraySize--;
-            _boolList.arraySize--;
+            _lightSwitchInterval.RemoveAt(_enabled.Count - 1);
+            _enabled.RemoveAt(_enabled.Count - 1);
         }
     }
 }
